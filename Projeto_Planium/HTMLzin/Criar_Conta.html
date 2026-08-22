@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criação de Conta</title>
+</head>
+<body>
+<div id="Criacao_de_Conta">
+<form action="../Backend/Criação.php" method="post">
+        <input type="text" name="N_nome" id="N_nome" placeholder="Crie seu Nome de Usuário">
+    <br>
+        <input type="text" name="N_email" id="N_email" placeholder="Crie seu E-Mail">
+    <br>
+        <input type="password" name="N_senha" id="N_senha" placeholder="Crie sua Senha">
+    <br>
+    <p id="Mensagem_Sucesso"></p>
+    <br>
+        <button type="submit">Criar Conta</button>
+    <br>
+        <button type="button" onclick="Limpar()">Limpar</button>
+    <br>
+    <br>
+    <a href="Tela_de_Início.html">Já tenho uma conta</a>
+</form>
+</div>
+<link rel="stylesheet" href="../Estilo/Login.css">
+<script src="../Javascriptzin/Criação.js"></script>
+</body>
+</html>

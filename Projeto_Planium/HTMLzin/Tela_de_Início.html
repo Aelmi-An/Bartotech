@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tela de Início</title>
+</head>
+<body>
+<div id="LoginInicial">
+    <form action="../Backend/Login.php" method="post">
+     <input type="text" name="email" id="email" placeholder="Digite seu E-Mail">
+<br>
+     <input type="password" name="senha" id="senha" placeholder="Digite sua Senha">
+
+     <p id="Mensagem_de_Erro"></p>
+
+     <button type="submit">Enviar</button>
+<br>
+     <button type="button" onclick="Limpar()">Limpar</button>
+<br>
+<br>
+        <a href="Criar_Conta.html">Ainda não tem uma conta?</a>
+    </form>
+</div>
+</body>
+<link rel="stylesheet" href="../Estilo/Login.css">
+<script src="../Javascriptzin/Login.js"></script>
+</html>
