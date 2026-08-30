@@ -14,6 +14,6 @@ $conexão, "insert into cadastro(email,senha,nome)
 values ('$N_email','$N_senha','$N_nome')"
 );
 
-header("Location: ../HTMLzin/Tela_de_Início.html");
+header("Location: ../HTML/Tela_de_Início.html");
 exit;
 ?>
