@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link rel="icon" type="image/png" sizes="32x32" href="../../Imagens/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../Imagens/favicon-16x16.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Criação de Conta</title>
+    <title>Planium - Criação de Conta</title>
 </head>
 <body>
 <div id="Criacao_de_Conta">
+    <h2 style="color: #1A222D;">Crie sua Conta!</h2>
 <form action="../Backend/Criação.php" method="post">
-        <input type="text" name="N_nome" id="N_nome" placeholder="Crie seu Nome de Usuário">
+        <input type="text" name="N_nome" id="N_nome" placeholder="Crie seu Nome de Usuário" required>
     <br>
-        <input type="text" name="N_email" id="N_email" placeholder="Crie seu E-Mail">
+        <input type="email" name="N_email" id="N_email" placeholder="Crie seu E-Mail" required>
     <br>
-        <input type="password" name="N_senha" id="N_senha" placeholder="Crie sua Senha">
+        <input type="password" name="N_senha" id="N_senha" placeholder="Crie sua Senha" required>
     <br>
     <p id="Mensagem_Sucesso"></p>
     <br>

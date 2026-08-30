@@ -10,8 +10,7 @@ body {
     box-sizing: border-box;
     gap: 20px;
     font-family: Verdana, sans-serif;
-    background: #edecf1;
-    color: #000000;
+    background: #e4e4e4;
 }
 
 #Mensagem_de_Erro{
@@ -21,12 +20,14 @@ body {
 #Mensagem_Sucesso{
     color: rgb(79, 187, 79);
 }
-
+a{
+    color: #328A86;
+}
 #LoginInicial, #Criacao_de_Conta {
     width: 100%;
     max-width: 200px;
-    background: rgba(255, 255, 255, 0.9);
-    border: 1px solid #8c93a0;
+    background: #F9F9F9;
+    border: 1px solid #1A222D;
     padding: 15px;
     display: flex;
     flex-direction: column;

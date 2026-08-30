@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link rel="icon" type="image/png" sizes="32x32" href="../../Imagens/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../Imagens/favicon-16x16.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tela de Início</title>
+    <title>Planium - Tela de Início</title>
 </head>
 <body>
 <div id="LoginInicial">
-    <form action="../Backend/Login.php" method="post">
-     <input type="text" name="email" id="email" placeholder="Digite seu E-Mail">
+    <h2 style="color: #1A222D;">Bem Vindo!</h2>
+    <form action="..SISTEMA_DE_LOGIN/Backend/Login.php" method="post">
+     <input type="email" name="email" id="email" placeholder="Digite seu E-Mail" required>
 <br>
-     <input type="password" name="senha" id="senha" placeholder="Digite sua Senha">
+     <input type="password" name="senha" id="senha" placeholder="Digite sua Senha" required>
 
      <p id="Mensagem_de_Erro"></p>
 
