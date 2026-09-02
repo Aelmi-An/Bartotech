@@ -1,10 +1,16 @@
- function Limpar(){
-document.getElementById("email").value='';
-document.getElementById("senha").value='';
+ function Limpar_Login(){
+let email = document.getElementById("email").value='';
+let senha = document.getElementById("senha").value='';
  }
-  //Analisa a url do site
+
+  function Limpar_Criação(){
+let nome = document.getElementById("N_nome").value='';
+let email = document.getElementById("N_email").value='';
+let senha = document.getElementById("N_senha").value='';
+ }
+
 const url = new URLSearchParams(window.location.search);
-  // Se ele achar a palavra "erro" lá na url (causada pelo php)..
+
  if (url.has('erro')) {
     document.getElementById('Mensagem_de_Erro').innerText = "Erro de login: E-mail ou Senha incorretos!";
   }
