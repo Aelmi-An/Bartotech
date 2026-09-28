@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="icon" type="image/png" sizes="32x32" href="../../Imagens/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../Imagens/favicon-16x16.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planum - Tela de Início</title>
+</head>
+<body>
+<div id="LoginInicial">
+    <h2 style="color: #1A222D;">Bem Vindo!</h2>
+    <form action="../PHP_SQL/Login.php" method="post">
+     <input type="email" name="email" id="email" placeholder="Digite seu E-Mail" required>
+<br>
+     <input type="password" name="senha" id="senha" placeholder="Digite sua Senha" required>
+
+     <p id="Mensagem_de_Erro"></p>
+
+     <button type="submit">Enviar</button>
+<br>
+     <button type="button" onclick="Limpar_Login()">Limpar</button>
+<br>
+<br>
+        <a href="Criar_Conta.html">Ainda não tem uma conta?</a>
+    </form>
+</div>
+</body>
+<link rel="stylesheet" href="../CSS/Login.css">
+<script src="../JS/Login.js"></script>
+</html>
