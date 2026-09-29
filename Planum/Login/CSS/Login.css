@@ -13,12 +13,8 @@ body {
     background: #e4e4e4;
 }
 
-#Mensagem_de_Erro{
+#Mensagem_de_Erro, #Mensagem_Erro{
     color: red;
-}
-
-#Mensagem_Sucesso{
-    color: rgb(79, 187, 79);
 }
 a{
     color: #328A86;
