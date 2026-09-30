@@ -21,7 +21,7 @@ if (mysqli_num_rows($resultado) > 0) {
     header("Location: ../../Website/HTML/Início.html"); 
 } else {
     //Caso o email/senha não exista, imprime erro na url
-     header("Location: ../../Website/HTML/Transicao.html");
-  exit;
+   header("Location: ../HTML/Tela_de_Início.html?erro=1");
+    exit;
 }
 ?>
