@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planum</title>
+    <style>
+        body { margin: 0; background: white; }
+        #transicao {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #transicao img {
+            width: 220px;
+            animation: logo 2s forwards;
+        }
+        @keyframes logo {
+            0%       { opacity: 0; transform: scale(.8); }
+            40%, 70% { opacity: 1; transform: scale(1); }
+            100%     { opacity: 0; transform: scale(1.1); }
+        }
+    </style>
+</head>
+<body>
+    <div id="transicao">
+        <img src="../../Imagens/logo.png" alt="Planum">
+    </div>
+    <script>
+        setTimeout(function () {
+            window.location.replace("Início.html");
+        }, 2000);
+    </script>
+</body>
+</html>

@@ -30,8 +30,7 @@ if (mysqli_num_rows($resultado) > 0) {
 
     mysqli_query($conexão, $sql);
 
-    header("Location: ../HTML/Login.html");
-    exit;
+   header("Location: ../../Website/HTML/Transicao.html");
 }
 
 ?>
