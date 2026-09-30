@@ -1,0 +1,52 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #f5f5f5;
+}
+
+.Cabeçalho_Estoque{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Ferramentas{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    justify-content: space-between;
+    padding: 5px;
+}
+
+.Estoque {
+    background-color: white;
+    width: 80%;
+    height: 500px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+.Cabeçalho_Planilha {
+    display: grid;
+    grid-template-columns: 100px 1fr 120px 100px 120px 120px;
+    font-weight: bold;
+}
+
+.linha_Grid {
+    display: grid;
+    grid-template-columns: 100px 1fr 120px 100px 120px 120px;
+}
+.linha_Grid>div, .Cabeçalho_Planilha>div{
+   padding: 10px;
+   border: 1px solid black;
+}
+.linha_Grid input, .linha_Grid select{
+    width: 100%;
+    background: transparent;
+    border: 1px solid black;
+}
+.linha_Grid input:focus, .linha_Grid select:focus{
+    background-color: #f5f5f5;
+}

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<link rel="icon" type="image/png" sizes="32x32" href="../../Imagens/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../Imagens/favicon-16x16.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Planum - Estoque</title>
+
+    <link rel="stylesheet" href="../CSS/Web.css">
+</head>
+
+<body>
+
+    <div class="Estoque">
+
+        <div class="Cabeçalho_Estoque">
+
+            <div class="titulo">
+                <h1>Estoque</h1>
+            </div>
+
+            <div class="Ações">
+                <button id="Novoproduto">+ Novo produto</button>
+            </div>
+
+        </div>
+
+        <div class="Ferramentas">
+
+            <div class="busca">
+                <input
+                    type="text"
+                    placeholder="Buscar produto..."
+                >
+            </div>
+
+            <div class="Filtros">
+                <button>Filtros</button>
+            </div>
+
+        </div>
+
+
+        <div class="Grid">
+
+            <div class="Cabeçalho_Planilha">
+
+                <div>ID</div>
+                <div>Produto</div>
+                <div>Quantidade</div>
+                <div>Unidade</div>
+                <div>Preço</div>
+                <div>Status</div>
+
+            </div>
+
+            <div class="linha_Grid">
+
+                <div>001</div>
+
+                <input type="text" value="Arroz 5kg">
+
+                <input type="number" value="20">
+
+                <Select>
+                       <option>UN</option>
+                       <option>KG</option>
+                       <option>CX</option>
+                       <option>LT</option>
+                       <option>PC</option>
+                </Select>
+
+                <input type="number" value="25.90" step="0.01">
+
+                <div>Normal</div>
+
+            </div>
+
+            <div class="linha_Grid">
+
+                <div>002</div>
+
+                <input type="text" value="Feijão 1kg">
+
+                <input type="number" value="8">
+
+                <Select>
+                       <option>UN</option>
+                       <option>KG</option>
+                       <option>CX</option>
+                       <option>LT</option>
+                       <option>PC</option>
+                </Select>
+
+                <input type="number" value="9.50" step="0.01">
+
+                <div>Baixo</div>
+
+            </div>
+
+            <div class="linha_Grid">
+
+                <div>003</div>
+
+                <input type="text" value="Pepsi 2L">
+
+                <input type="number" value="2">
+
+                <Select>
+                       <option>UN</option>
+                       <option>KG</option>
+                       <option>CX</option>
+                       <option>LT</option>
+                       <option>PC</option>
+                </Select>
+
+                <input type="number" value="42.00" step="0.01">
+
+                <div>Crítico</div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+<script src="../JS/Web.js"></script>
+</html>
