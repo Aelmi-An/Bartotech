@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../Imagens/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../Imagens/favicon-16x16.png">
+    <title>Planum - Configurações</title>
+    <link rel="stylesheet" href="../CSS/Planum.css">
+</head>
+<body>
+<div class="Pagina">
+
+<!-- menu -->
+<div class="Menu">
+    <a href="Início.html"><img src="../../Imagens/Logo.png" alt="Planum"></a>
+    <nav>
+        <a href="Início.html">Início</a>
+        <a href="Tabelas.html#tabelas">Tabelas</a>
+        <a href="Tabelas.html#financeiro">Financeiro</a>
+        <a href="Configuracoes.html" aria-current="page">Configurações</a>
+        <!-- <a href="Usuário.html">Usuário</a> -->
+
+        <div class="Grupo">Meus ramos</div>
+        <a href="Tabelas.html#tabelas">Todos</a>
+        <a href="Tabelas.html#vendas">Vendas</a>
+        <a href="Tabelas.html#estoque">Estoque</a>
+      <a href="Tabelas.html#marketing">Marketing</a>
+    </nav>
+    <div class="Conta">
+        <strong data-conta="nome">Minha conta</strong>
+        <span data-conta="email">email@exemplo.com</span>
+        <a href="../../Login/HTML/Login.html">Sair</a>
+    </div>
+</div>
+
+<div class="Conteudo">
+<div class="secao" id="configuracoes">
+    <h1>Configurações</h1>
+
+    <div class="Bloco">
+        <h2>Minha conta</h2>
+        <dl class="Campos">
+            <dt>Nome</dt><dd data-conta="nome">—</dd>
+            <dt>E-mail</dt><dd data-conta="email">—</dd>
+        </dl>
+        <button class="Botao_Sec" type="button">Editar informações</button>
+    </div>
+
+    <div class="Bloco">
+        <h2>Aparência</h2>
+        <label><input type="radio" name="tema" value="claro"> Claro</label>
+        <label><input type="radio" name="tema" value="escuro"> Escuro</label>
+    </div>
+
+    <div class="Bloco">
+        <h2>Meus ramos</h2>
+        <ul><li>Vendas</li><li>Estoque</li><li>Marketing</li></ul>
+        <button class="Botao_Sec" type="button">+ Adicionar ramo</button>
+    </div>
+</div>
+</div>
+
+</div>
+
+<script src="../JS/Planum.js"></script>
+</body>
+</html>
