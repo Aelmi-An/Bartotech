@@ -1,178 +1,345 @@
-// Tema claro/escuro
-let tema = 'claro';
-try {
-    tema = localStorage.getItem('planum-tema') || 'claro';
-} catch (erro) {}
-document.body.classList.toggle('escuro', tema === 'escuro');
+class Tema {
+    constructor() {
+        this.opcoes = document.querySelectorAll('input[name="tema"]');
+        this.iniciar();
+    }
 
-document.querySelectorAll('input[name="tema"]').forEach(opcao => {
-    opcao.checked = opcao.value === tema;
+    iniciar() {
+        let tema = 'claro';
 
-    opcao.addEventListener('change', () => {
-        document.body.classList.toggle('escuro', opcao.value === 'escuro');
         try {
-            localStorage.setItem('planum-tema', opcao.value);
+            tema = localStorage.getItem('planum-tema') || 'claro';
         } catch (erro) {}
-    });
-});
 
+        document.body.classList.toggle('escuro', tema === 'escuro');
 
-// Busca e abas (cada seção filtra a própria tabela)
-function filtrar(secao) {
-    const campo = secao.querySelector('.busca');
-    const aba = secao.querySelector('.abas .ativa');
+        this.opcoes.forEach(opcao => {
+            opcao.checked = opcao.value === tema;
 
-    const texto = campo ? campo.value.toLowerCase() : '';
-    const ramo = aba ? aba.dataset.ramo : 'todos';
+            opcao.addEventListener('change', () => {
+                document.body.classList.toggle('escuro', opcao.value === 'escuro');
 
-    secao.querySelectorAll('.linha_Grid').forEach(linha => {
-        const achouTexto = linha.textContent.toLowerCase().includes(texto);
-        const achouRamo = ramo === 'todos' || linha.dataset.ramo === ramo;
-
-        linha.hidden = !(achouTexto && achouRamo);
-    });
+                try {
+                    localStorage.setItem('planum-tema', opcao.value);
+                } catch (erro) {}
+            });
+        });
+    }
 }
+
+
+class FiltroTabela {
+    constructor(secao) {
+        this.secao = secao;
+        this.campo = secao.querySelector('.busca');
+        this.linhas = secao.querySelectorAll('.linha_Grid');
+        this.ramo = 'todos';
+
+        this.iniciar();
+    }
+
+    iniciar() {
+        if (this.campo) {
+            this.campo.addEventListener('input', () => {
+                this.filtrar();
+            });
+        }
+
+        this.secao.querySelectorAll('.abas button').forEach(botao => {
+            botao.addEventListener('click', () => {
+                this.secao.querySelector('.abas .ativa').classList.remove('ativa');
+
+                botao.classList.add('ativa');
+
+                this.ramo = botao.dataset.ramo;
+
+                this.filtrar();
+            });
+        });
+    }
+
+    filtrar() {
+        let texto = '';
+
+        if (this.campo) {
+            texto = this.campo.value.toLowerCase();
+        }
+
+        this.linhas.forEach(linha => {
+            let textoLinha = linha.textContent.toLowerCase();
+
+            let achouTexto = textoLinha.includes(texto);
+            let achouRamo = this.ramo === 'todos' || linha.dataset.ramo === this.ramo;
+
+            if (achouTexto && achouRamo) {
+                linha.hidden = false;
+            } else {
+                linha.hidden = true;
+            }
+        });
+    }
+}
+
+
+class Estoque {
+    constructor() {
+        this.produtos = document.querySelectorAll('.situacao');
+        this.verificar();
+    }
+
+    verificar() {
+        this.produtos.forEach(produto => {
+            let quantidade = Number(produto.dataset.qtd);
+
+            if (quantidade > 10) {
+                produto.textContent = 'Normal';
+            } else if (quantidade >= 5) {
+                produto.textContent = 'Baixo';
+                produto.classList.add('baixo');
+            } else {
+                produto.textContent = 'Crítico';
+                produto.classList.add('critico');
+            }
+        });
+    }
+}
+
+
+class Calculadora {
+    somar(a, b) {
+        return a + b;
+    }
+
+    subtrair(a, b) {
+        return a - b;
+    }
+
+    multiplicar(a, b) {
+        return a * b;
+    }
+
+    dividir(a, b) {
+        if (b === 0) {
+            throw new Error("Divisão por zero não é permitida");
+        }
+
+        return a / b;
+    }
+}
+
+
+class CalculadoraUI {
+    constructor() {
+        this.calculadora = new Calculadora();
+
+        this.atual = '';
+        this.anterior = '';
+        this.operacao = '';
+        this.terminou = false;
+
+        this.painel = document.getElementById('calc');
+        this.visor = document.getElementById('visor');
+        this.contaAnterior = document.getElementById('conta-anterior');
+
+        this.iniciar();
+    }
+
+    iniciar() {
+        if (!this.painel) {
+            return;
+        }
+
+        document.querySelectorAll('.abrir-calc').forEach(botao => {
+            botao.addEventListener('click', () => {
+                this.painel.hidden = false;
+            });
+        });
+
+        let fechar = document.getElementById('fechar-calc');
+
+        if (fechar) {
+            fechar.addEventListener('click', () => {
+                this.painel.hidden = true;
+            });
+        }
+
+        this.painel.querySelectorAll('[data-tecla]').forEach(botao => {
+            botao.addEventListener('click', () => {
+                this.apertar(botao.dataset.tecla);
+            });
+        });
+    }
+
+    mostrar() {
+        let simbolo = this.operacao;
+
+        if (simbolo === '*') {
+            simbolo = '×';
+        }
+
+        let conta = this.anterior.replace('.', ',');
+        let numero = this.atual.replace('.', ',');
+
+        this.contaAnterior.textContent = conta;
+        this.visor.textContent = simbolo + numero;
+
+        if (this.visor.textContent === '') {
+            this.visor.textContent = '0';
+        }
+    }
+
+    calcular() {
+        if (this.operacao === '' || this.atual === '') {
+            return;
+        }
+
+        let a = Number(this.anterior);
+        let b = Number(this.atual);
+        let resultado;
+
+        if (this.operacao === '+') {
+            resultado = this.calculadora.somar(a, b);
+        } else if (this.operacao === '-') {
+            resultado = this.calculadora.subtrair(a, b);
+        } else if (this.operacao === '*') {
+            resultado = this.calculadora.multiplicar(a, b);
+        } else if (this.operacao === '/') {
+            try {
+                resultado = this.calculadora.dividir(a, b);
+            } catch (erro) {
+                this.visor.textContent = 'Erro';
+                this.contaAnterior.textContent = '';
+                this.atual = '';
+                this.anterior = '';
+                this.operacao = '';
+                return;
+            }
+        }
+
+        this.atual = String(Math.round(resultado * 100000000) / 100000000);
+
+        this.anterior = '';
+        this.operacao = '';
+        this.terminou = true;
+
+        this.mostrar();
+    }
+
+    apertar(tecla) {
+
+        if (tecla === 'C') {
+            this.atual = '';
+            this.anterior = '';
+            this.operacao = '';
+        }
+
+        else if (tecla === 'CE') {
+            this.atual = '';
+        }
+
+        else if (tecla === '=') {
+            this.calcular();
+            return;
+        }
+
+        else if ('+-*/'.includes(tecla)) {
+
+            if (this.atual === '' && this.anterior === '') {
+                return;
+            }
+
+            if (this.atual !== '') {
+
+                if (this.operacao !== '') {
+                    this.calcular();
+                }
+
+                this.anterior = this.atual;
+                this.atual = '';
+            }
+
+            this.operacao = tecla;
+            this.terminou = false;
+        }
+
+        else {
+
+            if (tecla === ',') {
+                tecla = '.';
+            }
+
+            if (tecla === '.' && this.atual.includes('.')) {
+                return;
+            }
+
+            if (this.terminou) {
+                this.atual = '';
+                this.terminou = false;
+            }
+
+            if (tecla === '.' && this.atual === '') {
+                this.atual = '0';
+            }
+
+            this.atual += tecla;
+        }
+
+        this.mostrar();
+    }
+}
+
+
+class Navegacao {
+    constructor() {
+        this.secoes = document.querySelectorAll('.secao');
+
+        if (this.secoes.length > 1) {
+            this.iniciar();
+        }
+    }
+
+    iniciar() {
+        window.addEventListener('hashchange', () => {
+            this.mostrar();
+        });
+
+        this.mostrar();
+    }
+
+    mostrar() {
+        let nome = window.location.hash.replace('#', '');
+
+        if (nome === '') {
+            nome = 'tabelas';
+        }
+
+        let secao = document.getElementById(nome);
+
+        if (!secao) {
+            nome = 'tabelas';
+        }
+
+        this.secoes.forEach(secao => {
+            secao.hidden = secao.id !== nome;
+        });
+
+        document.querySelectorAll('.menu nav a').forEach(link => {
+            link.removeAttribute('aria-current');
+
+            if (link.getAttribute('href') === 'Tabelas.html#' + nome) {
+                link.setAttribute('aria-current', 'page');
+            }
+        });
+    }
+}
+
+
+new Tema();
 
 document.querySelectorAll('.secao').forEach(secao => {
-    const campo = secao.querySelector('.busca');
-    if (campo) campo.addEventListener('input', () => filtrar(secao));
-
-    secao.querySelectorAll('.abas button').forEach(botao => {
-        botao.addEventListener('click', () => {
-            secao.querySelector('.abas .ativa').classList.remove('ativa');
-            botao.classList.add('ativa');
-            filtrar(secao);
-        });
-    });
+    new FiltroTabela(secao);
 });
 
-
-// Situação do estoque (mais de 10 normal, de 5 a 10 baixo, menos de 5 crítico)
-document.querySelectorAll('.situacao').forEach(celula => {
-    const qtd = Number(celula.dataset.qtd);
-
-    if (qtd > 10) {
-        celula.textContent = 'Normal';
-    } else if (qtd >= 5) {
-        celula.textContent = 'Baixo';
-        celula.classList.add('baixo');
-    } else {
-        celula.textContent = 'Crítico';
-        celula.classList.add('critico');
-    }
-});
-
-
-// Calculadora
-let atual = '';
-let anterior = '';
-let op = '';
-let acabou = false;
-
-function mostrar() {
-    const simbolo = op === '*' ? '×' : op;
-
-    document.getElementById('conta-anterior').textContent = anterior.replace('.', ',');
-    document.getElementById('visor').textContent = (simbolo + atual || '0').replace('.', ',');
-}
-
-function calcular() {
-    if (op === '' || atual === '') return;
-
-    const a = Number(anterior);
-    const b = Number(atual);
-    let resultado;
-
-    if (op === '+') resultado = a + b;
-    if (op === '-') resultado = a - b;
-    if (op === '*') resultado = a * b;
-    if (op === '/') resultado = a / b;
-
-    // divisão por zero cai aqui
-    if (!isFinite(resultado)) {
-        atual = '';
-        anterior = '';
-        op = '';
-        document.getElementById('conta-anterior').textContent = '';
-        document.getElementById('visor').textContent = 'Erro';
-        return;
-    }
-
-    atual = String(Math.round(resultado * 100000000) / 100000000);
-    anterior = '';
-    op = '';
-    acabou = true;
-    mostrar();
-}
-
-function apertar(tecla) {
-    if (tecla === 'C') {
-        atual = '';
-        anterior = '';
-        op = '';
-    } else if (tecla === 'CE') {
-        atual = '';
-    } else if (tecla === '=') {
-        calcular();
-        return;
-    } else if ('+-*/'.includes(tecla)) {
-        if (atual === '' && anterior === '') return;
-
-        if (atual !== '') {
-            if (op !== '') calcular();
-            anterior = atual;
-            atual = '';
-        }
-        op = tecla;
-        acabou = false;
-    } else {
-        if (tecla === ',') tecla = '.';
-        if (tecla === '.' && atual.includes('.')) return;
-
-        if (acabou) {
-            atual = '';
-            acabou = false;
-        }
-        if (tecla === '.' && atual === '') atual = '0';
-        atual += tecla;
-    }
-
-    mostrar();
-}
-
-const painel = document.getElementById('calc');
-
-if (painel) {
-    document.querySelectorAll('.abrir-calc').forEach(botao => {
-        botao.addEventListener('click', () => painel.hidden = false);
-    });
-
-    document.getElementById('fechar-calc').addEventListener('click', () => painel.hidden = true);
-
-    painel.querySelectorAll('[data-tecla]').forEach(botao => {
-        botao.addEventListener('click', () => apertar(botao.dataset.tecla));
-    });
-}
-
-
-
-// Troca de seção dentro da página Tabelas (Tabelas.html#vendas, #estoque...)
-function mostrarSecao() {
-    const secoes = document.querySelectorAll('.secao');
-
-    // Início e Configurações só têm uma seção
-    if (secoes.length < 2) return;
-
-    let nome = window.location.hash.replace('#', '') || 'tabelas';
-    if (!document.getElementById(nome)) nome = 'tabelas';
-
-    secoes.forEach(secao => {
-        secao.hidden = secao.id !== nome;
-    });
-
-    document.querySelectorAll('.Menu nav a').forEach(link => link.removeAttribute('aria-current'));
-    document.querySelector('.Menu nav a[href="Tabelas.html#' + nome + '"]').setAttribute('aria-current', 'page');
-}
-
-window.addEventListener('hashchange', mostrarSecao);
-mostrarSecao();
+new Estoque();
+new CalculadoraUI();
+new Navegacao();
