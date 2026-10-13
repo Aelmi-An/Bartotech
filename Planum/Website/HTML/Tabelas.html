@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../Imagens/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../Imagens/favicon-16x16.png">
+    <title>Planum - Tabelas</title>
+    <link rel="stylesheet" href="../CSS/Planum.css">
+</head>
+<body>
+<div class="Pagina">
+
+<!-- menu -->
+<div class="Menu">
+    <a href="Início.html"><img src="../../Imagens/Logo.png" alt="Planum"></a>
+    <nav>
+        <a href="Início.html">Início</a>
+        <a href="Tabelas.html#tabelas">Tabelas</a>
+        <a href="Tabelas.html#financeiro">Financeiro</a>
+        <a href="Configuracoes.html">Configurações</a>
+        <!-- <a href="Usuário.html">Usuário</a> -->
+
+        <div class="Grupo">Meus ramos</div>
+        <a href="Tabelas.html#tabelas">Todos</a>
+        <a href="Tabelas.html#vendas">Vendas</a>
+        <a href="Tabelas.html#estoque">Estoque</a>
+      <a href="Tabelas.html#marketing">Marketing</a>
+    </nav>
+    <div class="Conta">
+        <strong data-conta="nome">Minha conta</strong>
+        <span data-conta="email">email@exemplo.com</span>
+        <a href="../../Login/HTML/Login.html">Sair</a>
+    </div>
+</div>
+
+<div class="Conteudo">
+<div class="secao" id="tabelas">
+    <div class="Topo_Pagina">
+        <h1>Tabelas</h1>
+        <div class="Acoes">
+            <input class="busca" type="search" placeholder="Buscar..." aria-label="Buscar">
+            <button class="Botao" type="button">+ Nova tabela</button>
+        </div>
+    </div>
+    <div class="abas">
+        <button type="button" class="ativa" data-ramo="todos">Todos</button>
+        <button type="button" data-ramo="vendas">Vendas</button>
+        <button type="button" data-ramo="estoque">Estoque</button>
+        <button type="button" data-ramo="financeiro">Financeiro</button>
+        <button type="button" data-ramo="marketing">Marketing</button>
+    </div>
+    <div class="Caixa">
+    <div class="Cabeçalho_Planilha Col3"><div>Nome</div><div>Ramo</div><div>Última alteração</div></div>
+    <div class="linha_Grid Col3" data-ramo="vendas"><div><a href="#vendas">Vendas Setembro</a></div><div>Vendas</div><div>Editada hoje</div></div>
+    <div class="linha_Grid Col3" data-ramo="estoque"><div><a href="#estoque">Controle de Estoque</a></div><div>Estoque</div><div>Editada ontem</div></div>
+    <div class="linha_Grid Col3" data-ramo="marketing"><div><a href="#marketing">Campanhas</a></div><div>Marketing</div><div>Editada ontem</div></div>
+    <div class="linha_Grid Col3" data-ramo="financeiro"><div><a href="#financeiro">Fluxo de Caixa</a></div><div>Financeiro</div><div>Editada há 2 dias</div></div>
+    </div>
+</div>
+
+<!-- vendas -->
+<div class="secao" id="vendas" hidden>
+    <div class="Topo_Pagina">
+        <h1>Vendas</h1>
+        <div class="Acoes">
+            <input class="busca" type="search" placeholder="Buscar..." aria-label="Buscar">
+            <button class="Botao" type="button">+ Nova venda</button>
+        </div>
+    </div>
+    <div class="Caixa">
+    <div class="Cabeçalho_Planilha Col7"><div>ID</div><div>Produto</div><div>Cliente</div><div>Quantidade</div><div>Valor</div><div>Data</div><div>Status</div></div>
+    <div class="linha_Grid Col7"><div>001</div><div>Arroz 5kg</div><div>João</div><div>2</div><div>R$ 51,80</div><div>06/10/26</div><div>Pago</div></div>
+    <div class="linha_Grid Col7"><div>002</div><div>Feijão 1kg</div><div>Carlos</div><div>5</div><div>R$ 47,50</div><div>06/10/26</div><div>Pendente</div></div>
+    <div class="linha_Grid Col7"><div>003</div><div>Pepsi 2L</div><div>Maria</div><div>3</div><div>R$ 126,00</div><div>05/10/26</div><div>Pago</div></div>
+    </div>
+</div>
+
+<!-- estoque (esse a gente já tinha começado na Tabela.html) -->
+<div class="secao" id="estoque" hidden>
+    <div class="Topo_Pagina">
+        <h1>Estoque</h1>
+        <div class="Acoes">
+            <input class="busca" type="search" placeholder="Buscar..." aria-label="Buscar">
+            <button class="Botao" type="button">+ Novo produto</button>
+        </div>
+    </div>
+    <div class="Estoque">
+    <div class="Cabeçalho_Planilha Col6"><div>ID</div><div>Produto</div><div>Quantidade</div><div>Unidade</div><div>Preço</div><div>Status</div></div>
+    <div class="linha_Grid Col6"><div>001</div><div>Arroz 5kg</div><div>20</div><div>UN</div><div>R$ 25,90</div><div class="situacao" data-qtd="20"></div></div>
+    <div class="linha_Grid Col6"><div>002</div><div>Feijão 1kg</div><div>8</div><div>UN</div><div>R$ 9,50</div><div class="situacao" data-qtd="8"></div></div>
+    <div class="linha_Grid Col6"><div>003</div><div>Pepsi 2L</div><div>2</div><div>UN</div><div>R$ 42,00</div><div class="situacao" data-qtd="2"></div></div>
+    </div>
+</div>
+
+<div class="secao" id="financeiro" hidden>
+    <div class="Topo_Pagina">
+        <h1>Financeiro</h1>
+        <div class="Acoes">
+            <input class="busca" type="search" placeholder="Buscar..." aria-label="Buscar">
+            <button class="Botao_Sec abrir-calc" type="button">Calculadora</button><button class="Botao" type="button">+ Novo lançamento</button>
+        </div>
+    </div>
+    <div class="Caixa">
+    <div class="Cabeçalho_Planilha Col5"><div>Tipo</div><div>Descrição</div><div>Valor</div><div>Data</div><div>Status</div></div>
+    <div class="linha_Grid Col5"><div>Entrada</div><div>Venda</div><div>R$ 500,00</div><div>06/10</div><div>Recebido</div></div>
+    <div class="linha_Grid Col5"><div>Saída</div><div>Fornecedor</div><div>R$ 200,00</div><div>06/10</div><div>Pago</div></div>
+    <div class="linha_Grid Col5"><div>Saída</div><div>Energia</div><div>R$ 350,00</div><div>05/10</div><div>Pago</div></div>
+    </div>
+</div>
+
+<div class="secao" id="marketing" hidden>
+    <div class="Topo_Pagina">
+        <h1>Marketing</h1>
+        <div class="Acoes">
+            <input class="busca" type="search" placeholder="Buscar..." aria-label="Buscar">
+            <button class="Botao" type="button">+ Nova campanha</button>
+        </div>
+    </div>
+    <div class="Caixa">
+    <div class="Cabeçalho_Planilha Col4"><div>Campanha</div><div>Plataforma</div><div>Data</div><div>Status</div></div>
+    <div class="linha_Grid Col4"><div>Black Friday</div><div>Instagram</div><div>10/10</div><div>Ativa</div></div>
+    <div class="linha_Grid Col4"><div>Promoção</div><div>Facebook</div><div>15/10</div><div>Planejada</div></div>
+    </div>
+</div>
+</div>
+
+</div>
+<!-- Calculadora -->
+<div class="calc" id="calc" hidden>
+    <div class="calc-topo"><strong>Calculadora</strong><button type="button" id="fechar-calc" aria-label="Fechar">×</button></div>
+    <div class="visor-caixa"><div class="conta-anterior" id="conta-anterior"></div><div id="visor">0</div></div>
+    <div class="teclas">
+        <button type="button" data-tecla="7">7</button>
+        <button type="button" data-tecla="8">8</button>
+        <button type="button" data-tecla="9">9</button>
+        <button type="button" data-tecla="CE" class="apaga">CE</button>
+        <button type="button" data-tecla="C" class="apaga">C</button>
+        <button type="button" data-tecla="4">4</button>
+        <button type="button" data-tecla="5">5</button>
+        <button type="button" data-tecla="6">6</button>
+        <button type="button" data-tecla="/">/</button>
+        <button type="button" data-tecla="*">×</button>
+        <button type="button" data-tecla="1">1</button>
+        <button type="button" data-tecla="2">2</button>
+        <button type="button" data-tecla="3">3</button>
+        <button type="button" data-tecla="-">-</button>
+        <button type="button" data-tecla="+" class="mais">+</button>
+        <button type="button" data-tecla="0" class="zero">0</button>
+        <button type="button" data-tecla=",">,</button>
+        <button type="button" data-tecla="=" class="igual">=</button>
+    </div>
+</div>
+
+
+<script src="../JS/Planum.js"></script>
+</body>
+</html>
