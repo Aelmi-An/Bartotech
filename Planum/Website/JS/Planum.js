@@ -1,15 +1,17 @@
 class Tema {
     constructor() {
         this.opcoes = document.querySelectorAll('input[name="tema"]');
-        this.iniciar();
+        this.carregarTema();
     }
 
-    iniciar() {
+    carregarTema() {
         let tema = 'claro';
 
         try {
             tema = localStorage.getItem('planum-tema') || 'claro';
-        } catch (erro) {}
+        } catch (erro) {
+            tema = 'claro';
+        }
 
         document.body.classList.toggle('escuro', tema === 'escuro');
 
@@ -17,11 +19,15 @@ class Tema {
             opcao.checked = opcao.value === tema;
 
             opcao.addEventListener('change', () => {
-                document.body.classList.toggle('escuro', opcao.value === 'escuro');
+                let temaEscolhido = opcao.value;
+
+                document.body.classList.toggle('escuro', temaEscolhido === 'escuro');
 
                 try {
-                    localStorage.setItem('planum-tema', opcao.value);
-                } catch (erro) {}
+                    localStorage.setItem('planum-tema', temaEscolhido);
+                } catch (erro) {
+                    // O tema continua funcionando mesmo se o navegador bloquear o armazenamento.
+                }
             });
         });
     }
@@ -31,27 +37,32 @@ class Tema {
 class FiltroTabela {
     constructor(secao) {
         this.secao = secao;
-        this.campo = secao.querySelector('.busca');
+        this.campoBusca = secao.querySelector('.busca');
         this.linhas = secao.querySelectorAll('.linha_Grid');
-        this.ramo = 'todos';
+        this.ramoAtual = 'todos';
 
         this.iniciar();
     }
 
     iniciar() {
-        if (this.campo) {
-            this.campo.addEventListener('input', () => {
+        if (this.campoBusca) {
+            this.campoBusca.addEventListener('input', () => {
                 this.filtrar();
             });
         }
 
-        this.secao.querySelectorAll('.abas button').forEach(botao => {
+        let botoes = this.secao.querySelectorAll('.abas button');
+
+        botoes.forEach(botao => {
             botao.addEventListener('click', () => {
-                this.secao.querySelector('.abas .ativa').classList.remove('ativa');
+                let abaAtiva = this.secao.querySelector('.abas .ativa');
+
+                if (abaAtiva) {
+                    abaAtiva.classList.remove('ativa');
+                }
 
                 botao.classList.add('ativa');
-
-                this.ramo = botao.dataset.ramo;
+                this.ramoAtual = botao.dataset.ramo || 'todos';
 
                 this.filtrar();
             });
@@ -61,20 +72,24 @@ class FiltroTabela {
     filtrar() {
         let texto = '';
 
-        if (this.campo) {
-            texto = this.campo.value.toLowerCase();
+        if (this.campoBusca) {
+            texto = this.campoBusca.value.trim().toLowerCase();
         }
 
         this.linhas.forEach(linha => {
-            let textoLinha = linha.textContent.toLowerCase();
+            let conteudo = linha.textContent.toLowerCase();
+            let encontrouTexto = conteudo.includes(texto);
+            let encontrouRamo = this.ramoAtual === 'todos' ||
+                linha.dataset.ramo === this.ramoAtual;
 
-            let achouTexto = textoLinha.includes(texto);
-            let achouRamo = this.ramo === 'todos' || linha.dataset.ramo === this.ramo;
+            let esconder = !(encontrouTexto && encontrouRamo);
 
-            if (achouTexto && achouRamo) {
-                linha.hidden = false;
-            } else {
-                linha.hidden = true;
+            linha.hidden = esconder;
+
+            let acoes = linha.nextElementSibling;
+
+            if (acoes && acoes.classList.contains('linha-acoes')) {
+                acoes.hidden = esconder;
             }
         });
     }
@@ -84,12 +99,14 @@ class FiltroTabela {
 class Estoque {
     constructor() {
         this.produtos = document.querySelectorAll('.situacao');
-        this.verificar();
+        this.atualizarSituacao();
     }
 
-    verificar() {
+    atualizarSituacao() {
         this.produtos.forEach(produto => {
             let quantidade = Number(produto.dataset.qtd);
+
+            produto.classList.remove('baixo', 'critico');
 
             if (quantidade > 10) {
                 produto.textContent = 'Normal';
@@ -120,7 +137,7 @@ class Calculadora {
 
     dividir(a, b) {
         if (b === 0) {
-            throw new Error("Divisão por zero não é permitida");
+            throw new Error('Não é possível dividir por zero.');
         }
 
         return a / b;
@@ -131,7 +148,6 @@ class Calculadora {
 class CalculadoraUI {
     constructor() {
         this.calculadora = new Calculadora();
-
         this.atual = '';
         this.anterior = '';
         this.operacao = '';
@@ -145,7 +161,7 @@ class CalculadoraUI {
     }
 
     iniciar() {
-        if (!this.painel) {
+        if (!this.painel || !this.visor) {
             return;
         }
 
@@ -155,10 +171,10 @@ class CalculadoraUI {
             });
         });
 
-        let fechar = document.getElementById('fechar-calc');
+        let botaoFechar = document.getElementById('fechar-calc');
 
-        if (fechar) {
-            fechar.addEventListener('click', () => {
+        if (botaoFechar) {
+            botaoFechar.addEventListener('click', () => {
                 this.painel.hidden = true;
             });
         }
@@ -171,25 +187,19 @@ class CalculadoraUI {
     }
 
     mostrar() {
-        let simbolo = this.operacao;
-
-        if (simbolo === '*') {
-            simbolo = '×';
-        }
-
+        let simbolo = this.operacao === '*' ? '×' : this.operacao;
         let conta = this.anterior.replace('.', ',');
         let numero = this.atual.replace('.', ',');
 
-        this.contaAnterior.textContent = conta;
-        this.visor.textContent = simbolo + numero;
-
-        if (this.visor.textContent === '') {
-            this.visor.textContent = '0';
+        if (this.contaAnterior) {
+            this.contaAnterior.textContent = conta;
         }
+
+        this.visor.textContent = (simbolo + numero) || '0';
     }
 
     calcular() {
-        if (this.operacao === '' || this.atual === '') {
+        if (this.operacao === '' || this.atual === '' || this.anterior === '') {
             return;
         }
 
@@ -208,16 +218,19 @@ class CalculadoraUI {
                 resultado = this.calculadora.dividir(a, b);
             } catch (erro) {
                 this.visor.textContent = 'Erro';
-                this.contaAnterior.textContent = '';
                 this.atual = '';
                 this.anterior = '';
                 this.operacao = '';
+
+                if (this.contaAnterior) {
+                    this.contaAnterior.textContent = '';
+                }
+
                 return;
             }
         }
 
         this.atual = String(Math.round(resultado * 100000000) / 100000000);
-
         this.anterior = '';
         this.operacao = '';
         this.terminou = true;
@@ -226,30 +239,22 @@ class CalculadoraUI {
     }
 
     apertar(tecla) {
-
         if (tecla === 'C') {
             this.atual = '';
             this.anterior = '';
             this.operacao = '';
-        }
-
-        else if (tecla === 'CE') {
+            this.terminou = false;
+        } else if (tecla === 'CE') {
             this.atual = '';
-        }
-
-        else if (tecla === '=') {
+        } else if (tecla === '=') {
             this.calcular();
             return;
-        }
-
-        else if ('+-*/'.includes(tecla)) {
-
+        } else if ('+-*/'.includes(tecla)) {
             if (this.atual === '' && this.anterior === '') {
                 return;
             }
 
             if (this.atual !== '') {
-
                 if (this.operacao !== '') {
                     this.calcular();
                 }
@@ -260,10 +265,7 @@ class CalculadoraUI {
 
             this.operacao = tecla;
             this.terminou = false;
-        }
-
-        else {
-
+        } else {
             if (tecla === ',') {
                 tecla = '.';
             }
@@ -307,26 +309,21 @@ class Navegacao {
     }
 
     mostrar() {
-        let nome = window.location.hash.replace('#', '');
+        let nomeSecao = window.location.hash.slice(1) || 'tabelas';
+        let secaoExiste = document.getElementById(nomeSecao);
 
-        if (nome === '') {
-            nome = 'tabelas';
-        }
-
-        let secao = document.getElementById(nome);
-
-        if (!secao) {
-            nome = 'tabelas';
+        if (!secaoExiste) {
+            nomeSecao = 'tabelas';
         }
 
         this.secoes.forEach(secao => {
-            secao.hidden = secao.id !== nome;
+            secao.hidden = secao.id !== nomeSecao;
         });
 
-        document.querySelectorAll('.menu nav a').forEach(link => {
+        document.querySelectorAll('.Menu nav a').forEach(link => {
             link.removeAttribute('aria-current');
 
-            if (link.getAttribute('href') === 'Tabelas.html#' + nome) {
+            if (link.getAttribute('href') === 'Tabelas.html#' + nomeSecao) {
                 link.setAttribute('aria-current', 'page');
             }
         });
@@ -334,7 +331,93 @@ class Navegacao {
 }
 
 
+class MinhaConta {
+    constructor() {
+        this.form = document.getElementById('form-conta');
+        this.botaoEditar = document.getElementById('editar-conta');
+        this.botaoCancelar = document.getElementById('cancelar-conta');
+        this.campoNome = document.getElementById('nome-conta');
+        this.campoEmail = document.getElementById('email-conta');
+
+        this.mostrarDados();
+
+        if (!this.form || !this.botaoEditar || !this.botaoCancelar ||
+            !this.campoNome || !this.campoEmail) {
+            return;
+        }
+
+        this.iniciar();
+    }
+
+    iniciar() {
+        this.botaoEditar.addEventListener('click', () => {
+            this.campoNome.value = this.lerDado('planum-nome');
+            this.campoEmail.value = this.lerDado('planum-email');
+
+            this.form.hidden = false;
+            this.botaoEditar.hidden = true;
+            this.campoNome.focus();
+        });
+
+        this.botaoCancelar.addEventListener('click', () => {
+            this.form.reset();
+            this.form.hidden = true;
+            this.botaoEditar.hidden = false;
+        });
+
+        this.form.addEventListener('submit', evento => {
+            evento.preventDefault();
+
+            let nome = this.campoNome.value.trim();
+            let email = this.campoEmail.value.trim();
+
+            if (nome === '' || email === '') {
+                return;
+            }
+
+            try {
+                localStorage.setItem('planum-nome', nome);
+                localStorage.setItem('planum-email', email);
+            } catch (erro) {
+                alert('Não foi possível salvar os dados neste navegador.');
+                return;
+            }
+
+            this.mostrarDados();
+            this.form.hidden = true;
+            this.botaoEditar.hidden = false;
+        });
+    }
+
+    lerDado(chave) {
+        try {
+            return localStorage.getItem(chave) || '';
+        } catch (erro) {
+            return '';
+        }
+    }
+
+    mostrarDados() {
+        let nome = this.lerDado('planum-nome');
+        let email = this.lerDado('planum-email');
+
+        if (nome) {
+            document.querySelectorAll('[data-conta="nome"]').forEach(campo => {
+                campo.textContent = nome;
+            });
+        }
+
+        if (email) {
+            document.querySelectorAll('[data-conta="email"]').forEach(campo => {
+                campo.textContent = email;
+            });
+        }
+    }
+}
+
+
 new Tema();
+new MinhaConta();
 
 document.querySelectorAll('.secao').forEach(secao => {
     new FiltroTabela(secao);
