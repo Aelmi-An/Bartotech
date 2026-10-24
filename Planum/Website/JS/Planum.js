@@ -28,6 +28,7 @@ class Tema {
 }
 
 
+
 class FiltroTabela {
     constructor(secao) {
         this.secao = secao;
@@ -39,18 +40,16 @@ class FiltroTabela {
     }
 
     iniciar() {
-        if (this.campo) {
-            this.campo.addEventListener('input', () => {
-                this.filtrar();
-            });
-        }
+        this.campo?.addEventListener('input', () => {
+            this.filtrar();
+        });
 
         this.secao.querySelectorAll('.abas button').forEach(botao => {
             botao.addEventListener('click', () => {
-                this.secao.querySelector('.abas .ativa').classList.remove('ativa');
+                this.secao.querySelector('.abas .ativa')
+                    ?.classList.remove('ativa');
 
                 botao.classList.add('ativa');
-
                 this.ramo = botao.dataset.ramo;
 
                 this.filtrar();
@@ -59,26 +58,21 @@ class FiltroTabela {
     }
 
     filtrar() {
-        let texto = '';
-
-        if (this.campo) {
-            texto = this.campo.value.toLowerCase();
-        }
+        const texto = this.campo?.value.toLowerCase().trim() || '';
 
         this.linhas.forEach(linha => {
-            let textoLinha = linha.textContent.toLowerCase();
+            const textoOK = linha.textContent
+                .toLowerCase()
+                .includes(texto);
 
-            let achouTexto = textoLinha.includes(texto);
-            let achouRamo = this.ramo === 'todos' || linha.dataset.ramo === this.ramo;
+            const ramoOK = this.ramo === 'todos' ||
+                linha.dataset.ramo === this.ramo;
 
-            if (achouTexto && achouRamo) {
-                linha.hidden = false;
-            } else {
-                linha.hidden = true;
-            }
+            linha.hidden = !(textoOK && ramoOK);
         });
     }
 }
+
 
 
 class Estoque {
