@@ -4,7 +4,7 @@ class TabelaEstoque {
     constructor() {
         this.tabela = document.querySelector('.Estoque');
         this.botaoNovo = document.getElementById('Novoproduto');
-        this.idProduto = 4;
+        this.idProduto = 1;
 
         this.iniciar();
     }
