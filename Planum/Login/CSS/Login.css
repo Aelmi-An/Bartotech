@@ -1,34 +1,131 @@
 
-body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    margin: 0;
-    padding: 24px 16px;
+* {
     box-sizing: border-box;
-    gap: 20px;
-    font-family: Verdana, sans-serif;
-    background: #e4e4e4;
-    font-family: Arial, Helvetica, sans-serif;
 }
 
-#Mensagem_de_Erro, #Mensagem_Erro{
-    color: red;
+body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 24px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f1f2f0;
+    color: #292d32;
 }
-a{
-    color: #328A86;
-}
-#LoginInicial, #Criacao_de_Conta {
+
+#LoginInicial,
+#Criacao_de_Conta {
     width: 100%;
-    max-width: 200px;
-    background: #F9F9F9;
-    border: 1px solid #1A222D;
-    padding: 15px;
+    max-width: 370px;
+    padding: 32px;
+    background-color: #ffffff;
+    border: 1px solid #dedfdd;
+    border-radius: 8px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
+}
+
+h2 {
+    margin: 0 0 24px;
+    color: #292d32 !important;
+    font-size: 25px;
+    font-weight: 600;
+    text-align: center;
+}
+
+form {
     display: flex;
     flex-direction: column;
-    align-items: center;
     gap: 12px;
-    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.08);
+}
+
+input {
+    width: 100%;
+    min-height: 44px;
+    padding: 11px 12px;
+    border: 1px solid #d5d8d6;
+    border-radius: 5px;
+    outline: none;
+    background-color: #ffffff;
+    color: #292d32;
+    font-family: inherit;
+    font-size: 14px;
+    transition: border-color 0.2s;
+}
+
+input::placeholder {
+    color: #858a87;
+}
+
+input:focus {
+    border-color: #328a86;
+}
+
+button {
+    width: 100%;
+    min-height: 42px;
+    padding: 10px 14px;
+    border: 1px solid #328a86;
+    border-radius: 5px;
+    background-color: #328a86;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: #28736f;
+    border-color: #28736f;
+}
+
+button:focus-visible,
+a:focus-visible {
+    outline: 2px solid #328a86;
+    outline-offset: 3px;
+}
+
+button[type="button"] {
+    background-color: #ffffff;
+    color: #414743;
+    border-color: #d5d8d6;
+    font-weight: 500;
+}
+
+button[type="button"]:hover {
+    background-color: #f4f5f3;
+}
+
+a {
+    color: #328a86;
+    font-size: 13px;
+    text-align: center;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #245e5b;
+    text-decoration: underline;
+}
+
+#Mensagem_de_Erro,
+#Mensagem_Erro {
+    margin: 0;
+    color: #b42318;
+    font-size: 13px;
+    text-align: center;
+}
+
+@media (max-width: 420px) {
+    #LoginInicial,
+    #Criacao_de_Conta {
+        padding: 26px 22px;
+    }
+
+    h2 {
+        font-size: 23px;
+    }
 }
