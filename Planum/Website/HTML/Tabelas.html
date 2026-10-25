@@ -59,7 +59,6 @@
     </div>
 </div>
 
-<!-- Essa daqui é vendas -->
 <div class="secao" id="vendas" hidden>
     <div class="Topo_Pagina">
         <h1>Vendas</h1>
@@ -70,13 +69,9 @@
     </div>
     <div class="Caixa">
     <div class="Cabeçalho_Planilha Col7"><div>ID</div><div>Produto</div><div>Cliente</div><div>Quantidade</div><div>Valor</div><div>Data</div><div>Status</div></div>
-    <div class="linha_Grid Col7"><div>001</div><div>Arroz 5kg</div><div>João</div><div>2</div><div>R$ 51,80</div><div>06/10/26</div><div>Pago</div></div>
-    <div class="linha_Grid Col7"><div>002</div><div>Feijão 1kg</div><div>Carlos</div><div>5</div><div>R$ 47,50</div><div>06/10/26</div><div>Pendente</div></div>
-    <div class="linha_Grid Col7"><div>003</div><div>Pepsi 2L</div><div>Maria</div><div>3</div><div>R$ 126,00</div><div>05/10/26</div><div>Pago</div></div>
     </div>
 </div>
 
-<!-- estoque (esse a gente já tinha começado na Tabela.html) -->
 <div class="secao" id="estoque" hidden>
     <div class="Topo_Pagina">
         <h1>Estoque</h1>
@@ -87,9 +82,6 @@
     </div>
     <div class="Estoque">
     <div class="Cabeçalho_Planilha Col6"><div>ID</div><div>Produto</div><div>Quantidade</div><div>Unidade</div><div>Preço</div><div>Status</div></div>
-    <div class="linha_Grid Col6"><div>001</div><div>Arroz 5kg</div><div>20</div><div>UN</div><div>R$ 25,90</div><div class="situacao" data-qtd="20"></div></div>
-    <div class="linha_Grid Col6"><div>002</div><div>Feijão 1kg</div><div>8</div><div>UN</div><div>R$ 9,50</div><div class="situacao" data-qtd="8"></div></div>
-    <div class="linha_Grid Col6"><div>003</div><div>Pepsi 2L</div><div>2</div><div>UN</div><div>R$ 42,00</div><div class="situacao" data-qtd="2"></div></div>
     </div>
 </div>
 
@@ -98,14 +90,11 @@
         <h1>Financeiro</h1>
         <div class="Acoes">
             <input class="busca" type="search" placeholder="Buscar..." aria-label="Buscar">
-            <button class="Botao_Sec abrir-calc" type="button">Calculadora</button><button class="Botao" type="button">+ Novo lançamento</button>
+            <button class="Botao_Sec abrir-calc" type="button">Calculadora</button><button class="Botao" type="button" id="novo_pag">+ Novo pagamento</button>
         </div>
     </div>
     <div class="Caixa">
     <div class="Cabeçalho_Planilha Col5"><div>Tipo</div><div>Descrição</div><div>Valor</div><div>Data</div><div>Status</div></div>
-    <div class="linha_Grid Col5"><div>Entrada</div><div>Venda</div><div>R$ 500,00</div><div>06/10</div><div>Recebido</div></div>
-    <div class="linha_Grid Col5"><div>Saída</div><div>Fornecedor</div><div>R$ 200,00</div><div>06/10</div><div>Pago</div></div>
-    <div class="linha_Grid Col5"><div>Saída</div><div>Energia</div><div>R$ 350,00</div><div>05/10</div><div>Pago</div></div>
     </div>
 </div>
 
@@ -154,6 +143,9 @@
 
 
 <script src="../JS/Planum.js"></script>
-<script src="../JS/Tabelas.js"></script>
+<script src="../JS/T_Estoque.js"></script>
+<script src="../JS/T_Finanças.js"></script>
+<script src="../JS/T_Vendas.js"></script>
+<script src="../JS/T_Marketing.js"></script>
 </body>
 </html>
