@@ -1,33 +1,124 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-<link rel="icon" type="image/png" sizes="32x32" href="../../Imagens/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="../../Imagens/favicon-16x16.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Planum - Criação de Conta</title>
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../../Imagens/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../Imagens/favicon-16x16.png">
+
+    <title>Planum - Criar Conta</title>
+
+    <link rel="stylesheet" href="../CSS/Login.css">
+    <script src="../JS/Criar.js" defer></script>
 </head>
+
 <body>
-<div id="Criacao_de_Conta">
-    <h2 style="color: #1A222D;">Crie sua Conta!</h2>
-<form action="../PHP_SQL/Criação.php" method="post">
-        <input type="text" name="N_nome" id="N_nome" placeholder="Crie seu Nome de Usuário" required>
-    <br>
-        <input type="email" name="N_email" id="N_email" placeholder="Crie seu E-Mail" required>
-    <br>
-        <input type="password" name="N_senha" id="N_senha" placeholder="Crie sua Senha" required>
-    <br>
-    <p id="Mensagem_Erro"></p>
-    <br>
-        <button type="submit">Criar Conta</button>
-    <br>
-        <button type="button" onclick="Limpar_Criação()">Limpar</button>
-    <br>
-    <br>
-    <a href="Tela_de_Início.html">Já tenho uma conta</a>
-</form>
-</div>
-<link rel="stylesheet" href="../CSS/Login.css">
-<script src="../JS/Criar.js"></script>
+    <main class="container-login">
+
+        <section class="painel-esquerdo">
+            <div class="conteudo-esquerdo">
+                <div class="logo-container">
+                    <img
+                        src="../../Imagens/Logo.png"
+                        alt="Logo Planum"
+                        class="logo-login"
+                    >
+                </div>
+
+                <span class="texto-destaque">COMECE POR AQUI</span>
+
+                <h1>Organize suas ideias.<br>Construa seus planos.</h1>
+
+                <p>
+                    Crie sua conta e tenha um espaço para organizar
+                    suas informações e acompanhar seus projetos.
+                </p>
+            </div>
+
+            <div class="detalhe-inferior">
+                <span class="ponto"></span>
+                <span>Organize. Planeje. Evolua.</span>
+            </div>
+        </section>
+
+        <section class="painel-direito">
+            <div class="formulario-container">
+
+                <div class="cabecalho-formulario">
+                    <span class="pequeno-titulo">SUA CONTA PLANUM</span>
+                    <h2>Crie sua conta</h2>
+                    <p>Preencha os campos abaixo para começar.</p>
+                </div>
+
+                <form action="../PHP_SQL/Criação.php" method="post">
+
+                    <div class="grupo-campo">
+                        <label for="N_nome">Nome de usuário</label>
+                        <input
+                            type="text"
+                            name="N_nome"
+                            id="N_nome"
+                            placeholder="Como podemos te chamar?"
+                            autocomplete="username"
+                            required
+                        >
+                    </div>
+
+                    <div class="grupo-campo">
+                        <label for="N_email">E-mail</label>
+                        <input
+                            type="email"
+                            name="N_email"
+                            id="N_email"
+                            placeholder="exemplo@email.com"
+                            autocomplete="email"
+                            required
+                        >
+                    </div>
+
+                    <div class="grupo-campo">
+                        <label for="N_senha">Senha</label>
+                        <input
+                            type="password"
+                            name="N_senha"
+                            id="N_senha"
+                            placeholder="Crie uma senha"
+                            autocomplete="new-password"
+                            required
+                        >
+                    </div>
+
+                    <p id="Mensagem_Erro" role="alert"></p>
+
+                    <button type="submit" class="botao-entrar">
+                        Criar minha conta
+                        <span aria-hidden="true">→</span>
+                    </button>
+
+                    <button type="button" class="botao-limpar" onclick="Limpar_Criação()">
+                        Limpar campos
+                    </button>
+
+                    <div class="separador">
+                        <span></span>
+                        <p>JÁ TEM UMA CONTA?</p>
+                        <span></span>
+                    </div>
+
+                    <a href="Login.html" class="link-cadastro">
+                        Voltar para o login
+                    </a>
+                </form>
+
+                <p class="rodape-formulario">
+                    Planum · Organização para o seu dia a dia
+                </p>
+
+            </div>
+        </section>
+
+    </main>
 </body>
 </html>
