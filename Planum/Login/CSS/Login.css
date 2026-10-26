@@ -1,14 +1,15 @@
-- {
+
+* {
     box-sizing: border-box;
 }
 
 :root {
     --verde: #08B2A3;
-    --verde-escuro: #068075;
-    --texto: #2D3748;
-    --texto-suave: #718096;
-    --borda: #E2E8F0;
-    --fundo: #EEF2F5;
+    --verde-escuro: #078F84;
+    --texto: #303936;
+    --texto-suave: #777F7B;
+    --borda: #DFE3E1;
+    --fundo: #D2D2D2;
 }
 
 html {
@@ -23,7 +24,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     color: var(--texto);
     background: var(--fundo);
 }
@@ -38,9 +39,9 @@ body {
     margin: auto;
     overflow: hidden;
     background: #FFFFFF;
-    border: 1px solid rgba(226, 232, 240, 0.8);
-    border-radius: 20px;
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08);
+    border: 1px solid #C8C8C8;
+    border-radius: 19px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.10);
 }
 
 .painel-esquerdo {
@@ -53,30 +54,30 @@ body {
     padding: 45px 55px;
     overflow: hidden;
     color: #FFFFFF;
-    background: linear-gradient(135deg, #08B2A3 0%, #067A70 100%);
+    background: linear-gradient(145deg, #08B2A3, #07998E);
 }
 
 .painel-esquerdo::before,
 .painel-esquerdo::after {
     content: "";
     position: absolute;
-    border: 2px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.13);
     border-radius: 50%;
     pointer-events: none;
 }
 
 .painel-esquerdo::before {
-    width: 380px;
-    height: 380px;
-    top: -140px;
-    right: -160px;
+    width: 340px;
+    height: 340px;
+    top: -130px;
+    right: -190px;
 }
 
 .painel-esquerdo::after {
-    width: 300px;
-    height: 300px;
-    right: -100px;
-    bottom: -160px;
+    width: 260px;
+    height: 260px;
+    right: -120px;
+    bottom: -150px;
 }
 
 .conteudo-esquerdo {
@@ -89,13 +90,12 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 95px;
-    height: 95px;
+    width: 100px;
+    height: 100px;
     margin-bottom: 30px;
-    padding: 10px;
-    border-radius: 16px;
+    padding: 8px;
+    border-radius: 15px;
     background: #FFFFFF;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
 
 .logo-login {
@@ -111,9 +111,8 @@ body {
     margin: 8px 0 18px;
     color: #FFFFFF;
     font-size: 32px;
-    font-weight: 700;
     line-height: 1.3;
-    letter-spacing: -0.5px;
+    letter-spacing: -0.6px;
 }
 
 .painel-esquerdo p {
@@ -121,18 +120,16 @@ body {
     z-index: 1;
     max-width: 360px;
     margin: 0;
-    color: #E6FFF9;
+    color: #F0FFFC;
     font-size: 14px;
-    line-height: 1.8;
+    line-height: 1.9;
 }
 
 .painel-esquerdo .texto-destaque {
     margin-bottom: 8px;
-    font-size: 12px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: #B2F5EA;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
 }
 
 .detalhe-inferior {
@@ -142,15 +139,15 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
-    color: #E6FFF9;
+    color: #F0FFFC;
     font-size: 12px;
 }
 
 .ponto {
-    width: 6px;
-    height: 6px;
+    width: 7px;
+    height: 7px;
     border-radius: 50%;
-    background: #B2F5EA;
+    background: #FFFFFF;
 }
 
 .painel-direito {
@@ -173,38 +170,38 @@ body {
 }
 
 .painel-direito h2 {
-    margin: 0 0 8px;
-    color: var(--texto);
-    font-size: 28px;
-    font-weight: 700;
-    letter-spacing: -0.5px;
+    margin: 0 0 10px;
+    color: #303936;
+    font-size: 29px;
+    line-height: 1.25;
+    letter-spacing: -0.6px;
 }
 
 .painel-direito .subtitulo {
     margin: 0;
     color: var(--texto-suave);
     font-size: 14px;
-    line-height: 1.6;
+    line-height: 1.7;
 }
 
 .painel-direito form {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 13px;
     width: 100%;
 }
 
 .grupo-campo {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 8px;
     width: 100%;
 }
 
 .painel-direito label {
-    color: #4A5568;
+    color: #424945;
     font-size: 12px;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .painel-direito input {
@@ -212,79 +209,76 @@ body {
     width: 100%;
     min-width: 0;
     min-height: 48px;
-    padding: 12px 16px;
-    border: 1.5px solid var(--borda);
-    border-radius: 10px;
+    padding: 12px 15px;
+    border: 1px solid var(--borda);
+    border-radius: 8px;
     outline: none;
-    background: #F8FAFC;
-    color: var(--texto);
-    font-family: inherit;
-    font-size: 14px;
-    transition: all 0.25s ease;
+    background: #FAFAFA;
+    color: #303936;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
 }
 
 .painel-direito input::placeholder {
-    color: #A0AEC0;
+    color: #929995;
 }
 
 .painel-direito input:focus {
     border-color: var(--verde);
     background: #FFFFFF;
-    box-shadow: 0 0 0 4px rgba(8, 178, 163, 0.1);
+    box-shadow: 0 0 0 3px rgba(8, 178, 163, 0.12);
 }
 
 .painel-direito button {
     display: block;
     width: 100%;
-    min-height: 48px;
+    min-height: 47px;
     margin: 0;
-    padding: 12px 16px;
+    padding: 12px 15px;
     border: 1px solid transparent;
-    border-radius: 10px;
-    font-family: inherit;
-    font-size: 14px;
-    font-weight: 600;
+    border-radius: 8px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    font-weight: 700;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: background 0.2s, border-color 0.2s;
 }
 
 .painel-direito button[type="submit"],
 .painel-direito .botao-entrar {
-    margin-top: 6px;
+    margin-top: 8px;
     background: var(--verde);
     color: #FFFFFF;
-    box-shadow: 0 4px 12px rgba(8, 178, 163, 0.25);
 }
 
 .painel-direito button[type="submit"]:hover,
 .painel-direito .botao-entrar:hover {
     background: var(--verde-escuro);
-    transform: translateY(-1px);
-    box-shadow: 0 6px 16px rgba(8, 178, 163, 0.3);
 }
 
 .painel-direito button[type="button"],
 .painel-direito .botao-limpar {
-    background: #EDF2F7;
-    border-color: #E2E8F0;
-    color: #4A5568;
+    background: #F1F1F1;
+    border-color: #E0E0E0;
+    color: #454B47;
 }
 
 .painel-direito button[type="button"]:hover,
 .painel-direito .botao-limpar:hover {
-    background: #E2E8F0;
+    background: #E5E5E5;
 }
 
 .painel-direito button:focus-visible,
 .painel-direito a:focus-visible {
     outline: 2px solid var(--verde);
-    outline-offset: 2px;
+    outline-offset: 3px;
 }
 
 #Mensagem_de_Erro,
 #Mensagem_Erro {
     margin: 0;
-    color: #E53E3E;
+    color: #B42318;
     font-size: 12px;
     line-height: 1.5;
 }
@@ -292,37 +286,35 @@ body {
 .link-cadastro {
     display: block;
     width: 100%;
-    margin-top: 10px;
+    margin-top: 12px;
     padding: 12px;
-    border: 1.5px solid var(--borda);
-    border-radius: 10px;
+    border: 1px solid #DADADA;
+    border-radius: 8px;
     background: #FFFFFF;
-    color: #4A5568;
+    color: #555D58;
     font-size: 13px;
     font-weight: 600;
+    line-height: 1.5;
     text-align: center;
     text-decoration: none;
-    transition: all 0.2s ease;
+    transition: background 0.2s, border-color 0.2s;
 }
 
 .link-cadastro:hover {
-    background: #F8FAFC;
-    border-color: #CBD5E0;
+    background: #F5F5F5;
+    border-color: #BDBDBD;
 }
 
 .link-cadastro a {
-    color: var(--verde);
+    color: #555D58;
     font-weight: 700;
-    text-decoration: none;
-}
-
-.link-cadastro a:hover {
     text-decoration: underline;
+    text-decoration-color: #A0A0A0;
 }
 
 .rodape-formulario {
     margin: 20px 0 0;
-    color: #A0AEC0;
+    color: #858B87;
     font-size: 11px;
     text-align: center;
 }
@@ -332,28 +324,28 @@ body {
     align-items: center;
     justify-content: center;
     width: 100%;
-    min-height: 48px;
-    margin-top: 10px;
-    padding: 12px 16px;
-    border: 1.5px solid var(--borda);
-    border-radius: 10px;
+    min-height: 47px;
+    margin-top: 12px;
+    padding: 12px 15px;
+    border: 1px solid #DADADA;
+    border-radius: 8px;
     background: #FFFFFF;
-    color: #4A5568;
+    color: #454B47;
     font-size: 13px;
-    font-weight: 600;
+    font-weight: 700;
     text-align: center;
     text-decoration: none;
-    transition: all 0.2s ease;
+    transition: background 0.2s, border-color 0.2s;
 }
 
 .painel-direito .link-login:hover {
-    background: #F8FAFC;
-    border-color: #CBD5E0;
+    background: #F3F3F3;
+    border-color: #BDBDBD;
 }
 
 .painel-direito .texto-conta {
-    margin: 20px 0 8px;
-    color: var(--texto-suave);
+    margin: 22px 0 10px;
+    color: #777F7B;
     font-size: 12px;
     font-weight: 600;
 }
@@ -372,7 +364,7 @@ body {
     }
 
     .painel-esquerdo {
-        min-height: 220px;
+        min-height: 240px;
         padding: 30px;
     }
 
@@ -386,12 +378,20 @@ body {
         font-size: 26px;
     }
 
+    .painel-esquerdo p {
+        max-width: 100%;
+    }
+
     .detalhe-inferior {
         display: none;
     }
 
     .painel-direito {
         padding: 35px 30px;
+    }
+
+    .formulario-container {
+        max-width: 100%;
     }
 }
 
@@ -402,19 +402,27 @@ body {
 
     .container-login,
     .container-cadastro {
-        border-radius: 14px;
+        border-radius: 13px;
     }
 
     .painel-esquerdo {
-        min-height: 200px;
-        padding: 24px;
+        min-height: 220px;
+        padding: 25px;
     }
 
     .painel-esquerdo h1 {
-        font-size: 22px;
+        font-size: 23px;
     }
 
     .painel-direito {
-        padding: 28px 20px;
+        padding: 28px 22px;
+    }
+
+    .painel-direito h2 {
+        font-size: 25px;
+    }
+
+    .painel-direito input {
+        min-height: 45px;
     }
 }
