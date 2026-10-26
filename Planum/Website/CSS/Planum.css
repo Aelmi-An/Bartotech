@@ -30,7 +30,7 @@
     --anel-foco: 0 0 0 3px rgba(8, 178, 163, 0.18);
 
     --fonte: "Plus Jakarta Sans", "Segoe UI", system-ui, -apple-system,
-             Roboto, Arial, sans-serif;
+            Roboto, Arial, sans-serif;
 }
 
 body.escuro {
@@ -1020,4 +1020,37 @@ textarea:focus-visible {
     .teclas button:hover {
         transition: none;
     }
+}
+
+/* Fundo padrão adicionado */
+.Menu,
+.Caixa,
+.Estoque,
+.Bloco,
+.calc,
+.painel-direito,
+.container-login,
+.container-cadastro {
+    background-image:
+        radial-gradient(circle at 20px 20px, rgba(8, 178, 163, 0.045) 2px, transparent 2.5px),
+        radial-gradient(circle at 60px 60px, rgba(63, 63, 63, 0.035) 3px, transparent 3.5px),
+        linear-gradient(135deg, transparent 48%, rgba(63, 63, 63, 0.018) 49%, rgba(63, 63, 63, 0.018) 51%, transparent 52%);
+    background-size: 80px 80px, 80px 80px, 100px 100px;
+    background-position: 0 0, 0 0, 0 0;
+}
+
+body.escuro .Menu,
+body.escuro .Caixa,
+body.escuro .Estoque,
+body.escuro .Bloco,
+body.escuro .calc,
+body.escuro .painel-direito,
+body.escuro .container-login,
+body.escuro .container-cadastro {
+    background-image:
+        radial-gradient(circle at 20px 20px, rgba(79, 214, 201, 0.045) 2px, transparent 2.5px),
+        radial-gradient(circle at 60px 60px, rgba(255, 255, 255, 0.025) 3px, transparent 3.5px),
+        linear-gradient(135deg, transparent 48%, rgba(255, 255, 255, 0.015) 49%, rgba(255, 255, 255, 0.015) 51%, transparent 52%);
+    background-size: 80px 80px, 80px 80px, 100px 100px;
+    background-position: 0 0, 0 0, 0 0;
 }
