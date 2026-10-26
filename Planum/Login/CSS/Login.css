@@ -15,12 +15,13 @@ body {
     color: #3F3F3F;
 }
 
+/* Estrutura principal */
 .container-login {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 55% 45%;
     width: 100%;
-    max-width: 1000px;
-    min-height: 540px;
+    max-width: 1050px;
+    min-height: 560px;
     overflow: hidden;
     background-color: #FFFFFF;
     border: 1px solid #E5E5E5;
@@ -43,13 +44,13 @@ body {
 
 .logo-login {
     display: block;
-    width: 115px;
-    height: 115px;
+    width: 110px;
+    height: 110px;
     margin-bottom: 35px;
     object-fit: contain;
     background-color: #FFFFFF;
-    border-radius: 14px;
-    padding: 8px;
+    border-radius: 12px;
+    padding: 6px;
 }
 
 .painel-esquerdo h1 {
@@ -57,6 +58,7 @@ body {
     font-size: 32px;
     line-height: 1.2;
     font-weight: 700;
+    color: #FFFFFF;
 }
 
 .painel-esquerdo p {
@@ -67,13 +69,14 @@ body {
     color: #F0FFFC;
 }
 
-/* Formulário direito */
+/* Painel direito */
 .painel-direito {
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding: 45px;
     background-color: #FFFFFF;
+    min-width: 0;
 }
 
 .painel-direito h2 {
@@ -89,6 +92,7 @@ body {
     line-height: 1.5;
 }
 
+/* Formulário */
 .painel-direito form {
     display: flex;
     flex-direction: column;
@@ -113,13 +117,15 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 14px;
     outline: none;
-    transition: border-color 0.2s;
+    transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .painel-direito input:focus {
     border-color: #08B2A3;
+    box-shadow: 0 0 0 3px rgba(8, 178, 163, 0.12);
 }
 
+/* Botões */
 .painel-direito button {
     width: 100%;
     min-height: 45px;
@@ -129,6 +135,7 @@ body {
     border-radius: 7px;
     background-color: #08B2A3;
     color: #FFFFFF;
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 15px;
     font-weight: 600;
     cursor: pointer;
@@ -139,6 +146,13 @@ body {
     background-color: #078F84;
 }
 
+.painel-direito button:focus-visible,
+.painel-direito a:focus-visible {
+    outline: 2px solid #08B2A3;
+    outline-offset: 3px;
+}
+
+/* Link para cadastro */
 .painel-direito a {
     color: #078F84;
     font-size: 13px;
@@ -153,13 +167,16 @@ body {
 .painel-direito .link-cadastro {
     margin-top: 20px;
     color: #666666;
+    font-size: 13px;
+    line-height: 1.6;
+    text-align: center;
 }
 
 .painel-direito .link-cadastro a {
     font-weight: 600;
 }
 
-/* Mensagem de erro */
+/* Mensagens de erro */
 #Mensagem_de_Erro,
 #Mensagem_Erro {
     margin: 0;
@@ -168,15 +185,18 @@ body {
     text-align: center;
 }
 
-/* Celular e telas menores */
+/* Telas menores */
 @media (max-width: 700px) {
     body {
         padding: 15px;
+        align-items: flex-start;
     }
 
     .container-login {
         grid-template-columns: 1fr;
         max-width: 430px;
+        min-height: auto;
+        margin: auto;
     }
 
     .painel-esquerdo {
@@ -200,5 +220,24 @@ body {
 
     .painel-direito {
         padding: 30px 25px;
+    }
+
+    .painel-direito h2 {
+        font-size: 25px;
+    }
+}
+
+/* Celulares pequenos */
+@media (max-width: 380px) {
+    .painel-esquerdo {
+        padding: 22px;
+    }
+
+    .painel-direito {
+        padding: 25px 20px;
+    }
+
+    .painel-esquerdo h1 {
+        font-size: 23px;
     }
 }
