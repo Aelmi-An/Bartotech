@@ -243,26 +243,6 @@ textarea:focus-visible {
     font-weight: 700;
 }
 
-.Menu .menu-acao {
-    display: block;
-    width: 100%;
-    padding: 10px 12px;
-    border: 0;
-    border-radius: 8px;
-    background: none;
-    color: var(--texto-medio);
-    font-size: 14px;
-    font-weight: 600;
-    text-align: left;
-    cursor: pointer;
-    transition: background-color 0.2s, color 0.2s;
-}
-
-.Menu .menu-acao:hover {
-    background: var(--campo);
-    color: var(--texto);
-}
-
 .Grupo {
     margin: 24px 0 6px 12px;
     color: var(--texto-suave);
@@ -851,9 +831,7 @@ textarea:focus-visible {
         gap: 6px;
     }
 
-    .Menu nav a,
-    .Menu nav .menu-acao {
-        width: auto;
+    .Menu nav a {
         padding: 9px 12px;
     }
 
@@ -917,9 +895,7 @@ textarea:focus-visible {
         gap: 6px;
     }
 
-    .Menu nav a,
-    .Menu nav .menu-acao {
-        width: 100%;
+    .Menu nav a {
         padding: 10px 8px;
         font-size: 13px;
         text-align: center;
