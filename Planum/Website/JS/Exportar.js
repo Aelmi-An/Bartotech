@@ -13,6 +13,17 @@ class ExportarCSV {
         return document.querySelector('.secao:not([hidden])');
     }
 
+    secoesDeDados() {
+        return Array.from(document.querySelectorAll('.secao')).filter(secao => {
+            return secao.id !== 'tabelas' && secao.querySelector('.Cabeçalho_Planilha');
+        });
+    }
+
+    tituloDaSecao(secao) {
+        let titulo = secao.querySelector('h1');
+        return titulo ? titulo.textContent.trim() : secao.id;
+    }
+
     lerCelula(celula) {
         let campo = celula.matches('input, select, textarea')
             ? celula
@@ -46,7 +57,7 @@ class ExportarCSV {
             .join(';');
     }
 
-    montarCSV(secao) {
+    montarTabela(secao) {
         let linhas = [];
         let cabecalho = secao.querySelector('.Cabeçalho_Planilha');
 
@@ -55,10 +66,9 @@ class ExportarCSV {
             linhas.push(this.montarLinha(titulos));
         }
 
-        let dados = secao.querySelectorAll('.linha_Grid');
         let total = 0;
 
-        dados.forEach(linha => {
+        secao.querySelectorAll('.linha_Grid').forEach(linha => {
             if (linha.hidden) {
                 return;
             }
@@ -71,10 +81,26 @@ class ExportarCSV {
         return { texto: linhas.join('\r\n'), total: total };
     }
 
-    nomeArquivo(secao) {
-        let titulo = secao.querySelector('h1');
-        let nome = titulo ? titulo.textContent : secao.id;
+    montarTudo() {
+        let blocos = [];
+        let total = 0;
 
+        this.secoesDeDados().forEach(secao => {
+            let tabela = this.montarTabela(secao);
+
+            if (tabela.total === 0) {
+                return;
+            }
+
+            let titulo = this.montarLinha([this.tituloDaSecao(secao)]);
+            blocos.push(titulo + '\r\n' + tabela.texto);
+            total += tabela.total;
+        });
+
+        return { texto: blocos.join('\r\n\r\n'), total: total };
+    }
+
+    nomeArquivo(nome) {
         nome = nome
             .toLowerCase()
             .normalize('NFD')
@@ -94,10 +120,12 @@ class ExportarCSV {
             return;
         }
 
-        let csv = this.montarCSV(secao);
+        let todas = secao.id === 'tabelas';
+        let csv = todas ? this.montarTudo() : this.montarTabela(secao);
+        let nome = todas ? 'todas-as-tabelas' : this.tituloDaSecao(secao);
 
         if (csv.total === 0) {
-            alert('Não há linhas para exportar nesta tabela.');
+            alert('Não há linhas para exportar.');
             return;
         }
 
@@ -106,7 +134,7 @@ class ExportarCSV {
         let link = document.createElement('a');
 
         link.href = endereco;
-        link.download = this.nomeArquivo(secao);
+        link.download = this.nomeArquivo(nome);
         document.body.appendChild(link);
         link.click();
         link.remove();
