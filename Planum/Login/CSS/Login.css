@@ -11,6 +11,11 @@
     --borda: #E0E3E1;
 }
 
+html {
+    min-height: 100%;
+    background: #D2D2D2;
+}
+
 body {
     min-height: 100vh;
     margin: 0;
@@ -20,7 +25,7 @@ body {
     justify-content: center;
     font-family: Arial, Helvetica, sans-serif;
     color: var(--texto);
-    background: #DEDEDE;
+    background: #D2D2D2;
 }
 
 .container-login {
@@ -31,9 +36,9 @@ body {
     min-height: 590px;
     overflow: hidden;
     background: #FFFFFF;
-    border: 1px solid #D5D8D6;
+    border: 1px solid #C8C8C8;
     border-radius: 19px;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.10);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
 }
 
 .painel-esquerdo {
@@ -91,8 +96,7 @@ body {
 .logo-login {
     display: block;
     width: 100%;
-    height: auto;
-    max-height: 100%;
+    height: 100%;
     object-fit: contain;
 }
 
@@ -236,14 +240,14 @@ body {
 
 .painel-direito button[type="button"],
 .painel-direito .botao-limpar {
-    background: #F3F3F3;
-    border-color: #E5E5E5;
+    background: #F1F1F1;
+    border-color: #E0E0E0;
     color: #454B47;
 }
 
 .painel-direito button[type="button"]:hover,
 .painel-direito .botao-limpar:hover {
-    background: #E8E8E8;
+    background: #E5E5E5;
 }
 
 .painel-direito button:focus-visible,
@@ -264,24 +268,27 @@ body {
     display: block;
     margin-top: 14px;
     padding: 12px;
-    border: 1px solid rgba(8, 178, 163, 0.35);
+    border: 1px solid #DADADA;
     border-radius: 8px;
-    color: var(--verde-escuro);
+    color: #555D58;
     font-size: 13px;
     font-weight: 600;
     line-height: 1.5;
     text-align: center;
     text-decoration: none;
-    transition: background 0.2s;
+    transition: background 0.2s, border-color 0.2s;
 }
 
 .link-cadastro:hover {
-    background: #F0FAF8;
+    background: #F5F5F5;
+    border-color: #BDBDBD;
 }
 
 .link-cadastro a {
-    color: var(--verde-escuro);
+    color: #555D58;
     font-weight: 700;
+    text-decoration: underline;
+    text-decoration-color: #A0A0A0;
 }
 
 .rodape-formulario {
@@ -311,10 +318,6 @@ body {
         width: 75px;
         height: 75px;
         margin-bottom: 22px;
-    }
-
-    .logo-login {
-        width: 100%;
     }
 
     .painel-esquerdo h1 {
