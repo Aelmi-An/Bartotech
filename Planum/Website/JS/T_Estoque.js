@@ -1,20 +1,14 @@
 class TabelaEstoque {
     constructor() {
         this.tabela = document.querySelector('.Estoque');
-        this.botaoNovo = document.getElementById('Novoproduto');
+        this.botaoNovo = document.getElementById('NovoProduto');
         this.idProduto = 1;
 
         this.iniciar();
     }
 
     iniciar() {
-        if (!this.tabela || !this.botaoNovo) {
-            return;
-        }
-
-        this.botaoNovo.addEventListener('click', () => {
-            this.adicionar();
-        });
+        this.botaoNovo.addEventListener('click', () => {this.adicionar(); console.log("Tô conectado")});
     }
 
     adicionar() {
@@ -44,7 +38,7 @@ class Produto {
         this.linha.classList.add('linha_Grid', 'Col6');
 
         const id = document.createElement('div');
-        id.textContent = String(this.id).padStart(3, '0');
+        id.textContent = String(this.id).padStart('0');
 
         this.campoNome = document.createElement('input');
         this.campoNome.type = 'text';
@@ -80,7 +74,6 @@ class Produto {
             this.atualizarStatus();
         });
 
-        // Adiciona tudo à linha
         this.linha.append(
             id,
             this.campoNome,

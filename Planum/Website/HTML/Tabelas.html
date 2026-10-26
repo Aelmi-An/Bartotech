@@ -11,7 +11,6 @@
 <body>
 <div class="Pagina">
 
-<!-- Esse é o Menu -->
 <div class="Menu">
     <a href="Início.html"><img src="../../Imagens/Logo.png" alt="Planum"></a>
     <nav>
@@ -19,7 +18,6 @@
         <a href="Tabelas.html#tabelas">Tabelas</a>
         <a href="Tabelas.html#financeiro">Financeiro</a>
         <a href="Configuracoes.html">Configurações</a>
-        <!-- <a href="Usuário.html">Usuário</a> -->
 
         <div class="Grupo">Meus ramos</div>
         <a href="Tabelas.html#tabelas">Todos</a>
@@ -64,7 +62,7 @@
         <h1>Vendas</h1>
         <div class="Acoes">
             <input class="busca" type="search" placeholder="Buscar..." aria-label="Buscar">
-            <button class="Botao" type="button">+ Nova venda</button>
+            <button class="Botao" type="button" id="NovaVenda">+ Nova venda</button>
         </div>
     </div>
     <div class="Caixa">
@@ -77,7 +75,7 @@
         <h1>Estoque</h1>
         <div class="Acoes">
             <input class="busca" type="search" placeholder="Buscar..." aria-label="Buscar">
-           <button class="Botao" id="Novoproduto" type="button">+ Novo produto</button>
+           <button class="Botao" id="NovoProduto" type="button">+ Novo produto</button>
         </div>
     </div>
     <div class="Estoque">
@@ -90,7 +88,8 @@
         <h1>Financeiro</h1>
         <div class="Acoes">
             <input class="busca" type="search" placeholder="Buscar..." aria-label="Buscar">
-            <button class="Botao_Sec abrir-calc" type="button">Calculadora</button><button class="Botao" type="button" id="novo_pag">+ Novo pagamento</button>
+            <button class="Botao_Sec abrir-calc" type="button">Calculadora</button>
+            <button class="Botao" type="button" id="NovoPaga">+ Novo pagamento</button>
         </div>
     </div>
     <div class="Caixa">
@@ -103,19 +102,16 @@
         <h1>Marketing</h1>
         <div class="Acoes">
             <input class="busca" type="search" placeholder="Buscar..." aria-label="Buscar">
-            <button class="Botao" type="button" id="NovaCampanha">+ Nova campanha</button>
+            <button class="Botao" type="button" id="NovaCampanha">+ Nova Campanha</button>
         </div>
     </div>
     <div class="Caixa">
     <div class="Cabeçalho_Planilha Col4"><div>Campanha</div><div>Plataforma</div><div>Data</div><div>Status</div></div>
-    <div class="linha_Grid Col4"><div>Black Friday</div><div>Instagram</div><div>10/10</div><div>Ativa</div></div>
-    <div class="linha_Grid Col4"><div>Promoção</div><div>Facebook</div><div>15/10</div><div>Planejada</div></div>
-    </div>
 </div>
 </div>
 
 </div>
-<!-- Calculadora -->
+
 <div class="calc" id="calc" hidden>
     <div class="calc-topo"><strong>Calculadora</strong><button type="button" id="fechar-calc" aria-label="Fechar">×</button></div>
     <div class="visor-caixa"><div class="conta-anterior" id="conta-anterior"></div><div id="visor">0</div></div>

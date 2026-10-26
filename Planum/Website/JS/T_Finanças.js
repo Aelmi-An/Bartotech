@@ -1,26 +1,18 @@
-
 class TabelaFinancas {
     constructor() {
         this.tabela = document.querySelector('#financeiro .Caixa');
-        this.botaoNovo = document.getElementById('novo_pag');
+        this.botaoNovo = document.getElementById('NovoPaga');
         this.iniciar();
     }
 
     iniciar() {
-        if (!this.tabela || !this.botaoNovo) {
-            console.error('Financeiro: tabela ou botão não encontrado.');
-            return;
-        }
-
-        this.botaoNovo.addEventListener('click', () => {
-            this.adicionar();
-        });
+        this.botaoNovo.addEventListener('click', () => {this.adicionar(); console.log("Tô conectado")});
     }
 
     adicionar() {
-        const financa = new Financas(this.idFinancas);
+        const Financa = new Financas(this.idFinancas);
 
-        this.tabela.appendChild(financa.financa);
+        this.tabela.appendChild(Financa.financa);
         this.idFinancas++;
     }
 }
@@ -37,9 +29,9 @@ class Financas {
         this.criarLinhas();
     }
 
-    criarCelula(conteudo) {
+    criarCelula(slacoisas) {
         const celula = document.createElement('div');
-        celula.appendChild(conteudo);
+        celula.appendChild(slacoisas);
         return celula;
     }
 
@@ -74,12 +66,7 @@ class Financas {
         this.campoData.value = this.data;
 
         this.campoStatus = document.createElement('select');
-
-        [
-            'Recebido/Pago',
-            'Em Andamento',
-            'A ser Recebido/Pago'
-        ].forEach(status => {
+        ['Recebido/Pago','Em Andamento','A ser Recebido/Pago'].forEach(status => {
             const opcao = document.createElement('option');
             opcao.value = status;
             opcao.textContent = status;
@@ -95,20 +82,6 @@ class Financas {
             this.criarCelula(this.campoData),
             this.criarCelula(this.campoStatus)
         );
-
-        [
-            this.campoTipo,
-            this.campoDescricao,
-            this.campoValor,
-            this.campoData,
-            this.campoStatus
-        ].forEach(campo => {
-            campo.style.width = '100%';
-            campo.style.minWidth = '0';
-            campo.style.padding = '6px';
-            campo.style.fontFamily = 'inherit';
-            campo.style.fontSize = '14px';
-        });
     }
 }
 
