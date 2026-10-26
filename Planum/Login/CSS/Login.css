@@ -22,11 +22,7 @@ body {
     overflow-x: hidden;
     font-family: Arial, Helvetica, sans-serif;
     color: var(--texto);
-    background-image: url("../../Imagens/background.png");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    background: #F0F1F1;
 }
 
 .container-login {
@@ -41,7 +37,7 @@ body {
     background: #FFFFFF;
     border: 1px solid rgba(220, 228, 224, 0.9);
     border-radius: 18px;
-    box-shadow: 0 18px 55px rgba(0, 0, 0, 0.16);
+    box-shadow: 0 18px 55px rgba(0, 0, 0, 0.12);
 }
 
 .painel-esquerdo {
@@ -337,7 +333,6 @@ body {
 @media (max-width: 800px) {
     body {
         padding: 20px;
-        background-attachment: scroll;
     }
 
     .container-login {
