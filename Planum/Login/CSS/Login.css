@@ -6,126 +6,199 @@
 body {
     min-height: 100vh;
     margin: 0;
-    padding: 24px 16px;
+    padding: 25px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #f1f2f0;
-    color: #292d32;
+    background-color: #F5F5F5;
+    color: #3F3F3F;
 }
 
-#LoginInicial,
-#Criacao_de_Conta {
+.container-login {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     width: 100%;
-    max-width: 370px;
-    padding: 32px;
-    background-color: #ffffff;
-    border: 1px solid #dedfdd;
-    border-radius: 8px;
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
+    max-width: 1000px;
+    min-height: 540px;
+    overflow: hidden;
+    background-color: #FFFFFF;
+    border: 1px solid #E5E5E5;
+    border-radius: 16px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
 }
 
-h2 {
-    margin: 0 0 24px;
-    color: #292d32 !important;
-    font-size: 25px;
-    font-weight: 600;
-    text-align: center;
-}
-
-form {
+/* Painel esquerdo */
+.painel-esquerdo {
+    position: relative;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 45px;
+    overflow: hidden;
+    background-color: #08B2A3;
+    color: #FFFFFF;
 }
 
-input {
-    width: 100%;
-    min-height: 44px;
-    padding: 11px 12px;
-    border: 1px solid #d5d8d6;
-    border-radius: 5px;
-    outline: none;
-    background-color: #ffffff;
-    color: #292d32;
-    font-family: inherit;
+.logo-login {
+    display: block;
+    width: 115px;
+    height: 115px;
+    margin-bottom: 35px;
+    object-fit: contain;
+    background-color: #FFFFFF;
+    border-radius: 14px;
+    padding: 8px;
+}
+
+.painel-esquerdo h1 {
+    margin: 0 0 15px;
+    font-size: 32px;
+    line-height: 1.2;
+    font-weight: 700;
+}
+
+.painel-esquerdo p {
+    max-width: 330px;
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.7;
+    color: #F0FFFC;
+}
+
+/* Formulário direito */
+.painel-direito {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 45px;
+    background-color: #FFFFFF;
+}
+
+.painel-direito h2 {
+    margin: 0 0 10px;
+    color: #3F3F3F;
+    font-size: 28px;
+}
+
+.painel-direito .subtitulo {
+    margin: 0 0 28px;
+    color: #777777;
     font-size: 14px;
+    line-height: 1.5;
+}
+
+.painel-direito form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.painel-direito label {
+    margin-bottom: -8px;
+    color: #3F3F3F;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.painel-direito input {
+    width: 100%;
+    min-height: 45px;
+    padding: 12px 14px;
+    border: 1px solid #D9DEDC;
+    border-radius: 7px;
+    background-color: #FFFFFF;
+    color: #3F3F3F;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    outline: none;
     transition: border-color 0.2s;
 }
 
-input::placeholder {
-    color: #858a87;
+.painel-direito input:focus {
+    border-color: #08B2A3;
 }
 
-input:focus {
-    border-color: #328a86;
-}
-
-button {
+.painel-direito button {
     width: 100%;
-    min-height: 42px;
-    padding: 10px 14px;
-    border: 1px solid #328a86;
-    border-radius: 5px;
-    background-color: #328a86;
-    color: #ffffff;
-    font-family: inherit;
-    font-size: 14px;
+    min-height: 45px;
+    margin-top: 5px;
+    padding: 12px;
+    border: none;
+    border-radius: 7px;
+    background-color: #08B2A3;
+    color: #FFFFFF;
+    font-size: 15px;
     font-weight: 600;
     cursor: pointer;
     transition: background-color 0.2s;
 }
 
-button:hover {
-    background-color: #28736f;
-    border-color: #28736f;
+.painel-direito button:hover {
+    background-color: #078F84;
 }
 
-button:focus-visible,
-a:focus-visible {
-    outline: 2px solid #328a86;
-    outline-offset: 3px;
-}
-
-button[type="button"] {
-    background-color: #ffffff;
-    color: #414743;
-    border-color: #d5d8d6;
-    font-weight: 500;
-}
-
-button[type="button"]:hover {
-    background-color: #f4f5f3;
-}
-
-a {
-    color: #328a86;
+.painel-direito a {
+    color: #078F84;
     font-size: 13px;
     text-align: center;
     text-decoration: none;
 }
 
-a:hover {
-    color: #245e5b;
+.painel-direito a:hover {
     text-decoration: underline;
 }
 
+.painel-direito .link-cadastro {
+    margin-top: 20px;
+    color: #666666;
+}
+
+.painel-direito .link-cadastro a {
+    font-weight: 600;
+}
+
+/* Mensagem de erro */
 #Mensagem_de_Erro,
 #Mensagem_Erro {
     margin: 0;
-    color: #b42318;
+    color: #B42318;
     font-size: 13px;
     text-align: center;
 }
 
-@media (max-width: 420px) {
-    #LoginInicial,
-    #Criacao_de_Conta {
-        padding: 26px 22px;
+/* Celular e telas menores */
+@media (max-width: 700px) {
+    body {
+        padding: 15px;
     }
 
-    h2 {
-        font-size: 23px;
+    .container-login {
+        grid-template-columns: 1fr;
+        max-width: 430px;
+    }
+
+    .painel-esquerdo {
+        min-height: 240px;
+        padding: 28px;
+    }
+
+    .logo-login {
+        width: 75px;
+        height: 75px;
+        margin-bottom: 20px;
+    }
+
+    .painel-esquerdo h1 {
+        font-size: 25px;
+    }
+
+    .painel-esquerdo p {
+        font-size: 14px;
+    }
+
+    .painel-direito {
+        padding: 30px 25px;
     }
 }

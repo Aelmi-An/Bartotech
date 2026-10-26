@@ -1,31 +1,92 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-<link rel="icon" type="image/png" sizes="32x32" href="../../Imagens/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="../../Imagens/favicon-16x16.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" type="image/png" sizes="32x32"
+        href="../../Imagens/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16"
+        href="../../Imagens/favicon-16x16.png">
+
     <title>Planum - Login</title>
+
+    <link rel="stylesheet" href="../CSS/Login.css">
+    <script src="../JS/Login.js" defer></script>
 </head>
+
 <body>
-<div id="LoginInicial">
-    <h2 style="color: #1A222D;">Bem Vindo!</h2>
-    <form action="../PHP_SQL/Login.php" method="post">
-     <input type="email" name="email" id="email" placeholder="Digite seu E-Mail" required>
-<br>
-     <input type="password" name="senha" id="senha" placeholder="Digite sua Senha" required>
 
-     <p id="Mensagem_de_Erro"></p>
+    <main class="container-login">
 
-     <button type="submit">Enviar</button>
-<br>
-     <button type="button" onclick="Limpar_Login()">Limpar</button>
-<br>
-<br>
-        <a href="Criar_Conta.html">Ainda não tem uma conta?</a>
-    </form>
-</div>
+        <section class="painel-esquerdo">
+
+            <img
+                src="../../Imagens/Logo.png"
+                alt="Logo Planum"
+                class="logo-login"
+            >
+
+            <h1>Bem-vindo de volta!</h1>
+
+            <p>
+                Entre na sua conta e continue organizando
+                suas informações com o Planum.
+            </p>
+
+        </section>
+
+        <section class="painel-direito">
+
+            <h2>Entrar</h2>
+
+            <p class="subtitulo">
+                Acesse sua conta para continuar.
+            </p>
+
+            <form action="../PHP_SQL/Login.php" method="post">
+
+                <label for="email">E-mail</label>
+
+                <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    placeholder="Digite seu E-mail"
+                    autocomplete="email"
+                    required
+                >
+
+                <label for="senha">Senha</label>
+
+                <input
+                    type="password"
+                    name="senha"
+                    id="senha"
+                    placeholder="Digite sua Senha"
+                    autocomplete="current-password"
+                    required
+                >
+
+                <p id="Mensagem_de_Erro"></p>
+
+                <button type="submit">Entrar</button>
+
+                <button type="button" onclick="Limpar_Login()">
+                    Limpar
+                </button>
+
+                <p class="link-cadastro">
+                    Ainda não tem uma conta?
+                    <a href="Criar_Conta.html">Criar uma conta</a>
+                </p>
+
+            </form>
+
+        </section>
+
+    </main>
+
 </body>
-<link rel="stylesheet" href="../CSS/Login.css">
-<script src="../JS/Login.js"></script>
 </html>
