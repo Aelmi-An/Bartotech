@@ -1,4 +1,3 @@
-
 class TabelaMarketing {
     constructor() {
         this.tabela = document.querySelector('#marketing .Caixa');
@@ -8,18 +7,44 @@ class TabelaMarketing {
     }
 
     iniciar() {
+        // ao abrir a página, busca as campanhas salvas no banco
+        this.carregar();
+
         this.botaoNovo.addEventListener('click', () => {this.adicionar(); console.log("Tô conectado");
         });
     }
 
-    adicionar() {
+    //  desenha cada campanha que veio do banco (tive que pesquisar como faz, não é um codigo codigo inteiramente meu.)
+    async carregar() {
+        const lista = await Registros.listar('marketing');
+
+        lista.forEach(item => {
+            const d = item.dados;
+            const marketar = new Marketing(d.campanha, d.plataforma, d.data, d.status);
+
+            marketar.idBanco = item.id;
+
+            this.tabela.appendChild(marketar.marketear);
+        });
+    }
+
+    async adicionar() {
         const marketar = new Marketing();
+
+        // cria a campanha no banco antes de mostrar a linha
+        await marketar.salvar();
+
+        if (marketar.idBanco === 0) {
+            return; // não salvou, então não mostra a linha
+        }
+
         this.tabela.appendChild(marketar.marketear);
     }
 }
 
 class Marketing {
     constructor(Camp = '',Plat = '',Data = '',Status = 'Em Planejamento') {
+        this.idBanco = 0;
         this.Camp = Camp;
         this.Plat = Plat;
         this.Data = Data;
@@ -69,6 +94,40 @@ class Marketing {
             this.criarCelula(this.campoDatas),
             this.criarCelula(this.campoStatuss)
         );
+
+        this.marketear.appendChild(Registros.botaoApagar('marketing', this, this.marketear));
+
+        // ao terminar de editar um campo, salva no banco
+        [
+            this.campoCamp,
+            this.campoPlat,
+            this.campoDatas,
+            this.campoStatuss
+        ].forEach(campo => {
+            campo.addEventListener('change', () => {
+                this.salvar();
+            });
+        });
+    }
+
+    // manda os dados para o banco
+    async salvar() {
+        this.Camp = this.campoCamp.value.trim();
+        this.Plat = this.campoPlat.value.trim();
+        this.Data = this.campoDatas.value;
+        this.Status = this.campoStatuss.value;
+
+        // idBanco 0 = cria uma campanha nova, maior que 0 = atualiza a que já existe
+        const novoId = await Registros.salvar('marketing', this.idBanco, {
+            campanha: this.Camp,
+            plataforma: this.Plat,
+            data: this.Data,
+            status: this.Status
+        });
+
+        if (novoId !== 0) {
+            this.idBanco = novoId;
+        }
     }
 }
 

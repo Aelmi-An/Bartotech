@@ -38,9 +38,8 @@ class Tema {
 class FiltroTabela {
     constructor(secao) {
         this.secao = secao;
-        this.campoBusca = secao.querySelector('.busca');
-        this.linhas = secao.querySelectorAll('.linha_Grid');
-        this.ramoAtual = 'todos';
+        this.campo = secao.querySelector('.busca');
+        this.ramo = 'todos';
 
         this.iniciar();
     }
@@ -67,24 +66,34 @@ class FiltroTabela {
         });
     }
 
+    // junta o texto de cada célula; nos campos de digitar, usa o valor deles
+    textoDaLinha(linha) {
+        return Array.from(linha.children)
+            .filter(celula => !celula.classList.contains('apagar'))
+            .map(celula => {
+                let campo = celula.matches('input, select, textarea')
+                    ? celula
+                    : celula.querySelector('input, select, textarea');
+
+                return campo ? campo.value : celula.textContent;
+            })
+            .join(' ')
+            .toLowerCase();
+    }
+
     filtrar() {
         let texto = '';
 
         if (this.campo) {
-            texto = this.campo.value.toLowerCase();
+            texto = this.campo.value.trim().toLowerCase();
         }
 
-        this.linhas.forEach(linha => {
-            let textoLinha = linha.textContent.toLowerCase();
-
-            let achouTexto = textoLinha.includes(texto);
+        // lê as linhas na hora, assim pega também as que foram criadas depois
+        this.secao.querySelectorAll('.linha_Grid').forEach(linha => {
+            let achouTexto = this.textoDaLinha(linha).includes(texto);
             let achouRamo = this.ramo === 'todos' || linha.dataset.ramo === this.ramo;
 
-            if (achouTexto && achouRamo) {
-                linha.hidden = false;
-            } else {
-                linha.hidden = true;
-            }
+            linha.hidden = !(achouTexto && achouRamo);
         });
     }
 }

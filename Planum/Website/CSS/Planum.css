@@ -322,14 +322,15 @@ textarea:focus-visible {
 }
 
 .Botao_Sec {
-    background: transparent;
+    background-color: #26a096;
     border-color: var(--borda);
-    color: var(--texto-medio);
+    color: #ffffff;
 }
 
 .Botao_Sec:hover {
-    background: var(--campo);
-    border-color: var(--borda-forte);
+    background: white;
+    border-color: #079A8D;
+    color: #079A8D;
 }
 
 .busca {
@@ -763,6 +764,41 @@ textarea:focus-visible {
 .teclas button.igual:hover {
     border-color: transparent;
     background: var(--verde-hover);
+}
+
+.linha_Grid {
+    position: relative;
+}
+
+.secao:not(#tabelas) .Cabeçalho_Planilha,
+.secao:not(#tabelas) .linha_Grid {
+    padding-right: 44px;
+}
+
+.linha_Grid .apagar {
+    position: absolute;
+    top: 50%;
+    right: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    border: 0;
+    border-radius: 8px;
+    background: none;
+    color: var(--texto-suave);
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    transform: translateY(-50%);
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.linha_Grid .apagar:hover {
+    background: rgba(180, 35, 24, 0.1);
+    color: var(--erro);
 }
 
 @media (min-width: 1440px) {

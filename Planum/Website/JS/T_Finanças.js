@@ -2,24 +2,51 @@ class TabelaFinancas {
     constructor() {
         this.tabela = document.querySelector('#financeiro .Caixa');
         this.botaoNovo = document.getElementById('NovoPaga');
+        this.idFinancas = 1;
         this.iniciar();
     }
 
     iniciar() {
+        // ao abrir a página, busca os pagamentos salvos no banco
+        this.carregar();
+
         this.botaoNovo.addEventListener('click', () => {this.adicionar(); console.log("Tô conectado")});
     }
 
-    adicionar() {
+    // forma cada pagamento que veio do banco (tive que pesquisar como faz, não é um codigo codigo inteiramente meu.)
+    async carregar() {
+        const lista = await Registros.listar('financas');
+
+        lista.forEach(item => {
+            const d = item.dados;
+            const Financa = new Financas(this.idFinancas, d.tipo, d.descricao, d.valor, d.data, d.status);
+
+            Financa.idBanco = item.id;
+
+            this.tabela.appendChild(Financa.financa);
+            this.idFinancas++;
+        });
+    }
+
+    async adicionar() {
         const Financa = new Financas(this.idFinancas);
+        this.idFinancas++;
+
+        // cria o pagamento no banco antes de mostrar a linha
+        await Financa.salvar();
+
+        if (Financa.idBanco === 0) {
+            return; 
+        }
 
         this.tabela.appendChild(Financa.financa);
-        this.idFinancas++;
     }
 }
 
 class Financas {
     constructor(id, tipo = 'Entrada', descricao = '', valor = '', data = '', status = 'Em Andamento') {
         this.id = id;
+        this.idBanco = 0;
         this.tipo = tipo;
         this.descricao = descricao;
         this.valor = valor;
@@ -82,6 +109,43 @@ class Financas {
             this.criarCelula(this.campoData),
             this.criarCelula(this.campoStatus)
         );
+
+        this.financa.appendChild(Registros.botaoApagar('financas', this, this.financa));
+
+        // ao terminar de editar um campo, salva no banco
+        [
+            this.campoTipo,
+            this.campoDescricao,
+            this.campoValor,
+            this.campoData,
+            this.campoStatus
+        ].forEach(campo => {
+            campo.addEventListener('change', () => {
+                this.salvar();
+            });
+        });
+    }
+
+    // manda os dados para o banco
+    async salvar() {
+        this.tipo = this.campoTipo.value;
+        this.descricao = this.campoDescricao.value;
+        this.valor = this.campoValor.value;
+        this.data = this.campoData.value;
+        this.status = this.campoStatus.value;
+
+        // idBanco 0 = cria um pagamento novo; maior que 0 = atualiza o que já existe
+        const novoId = await Registros.salvar('financas', this.idBanco, {
+            tipo: this.tipo,
+            descricao: this.descricao,
+            valor: this.valor,
+            data: this.data,
+            status: this.status
+        });
+
+        if (novoId !== 0) {
+            this.idBanco = novoId;
+        }
     }
 }
 
