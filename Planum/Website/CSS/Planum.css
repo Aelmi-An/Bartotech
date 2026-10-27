@@ -23,13 +23,11 @@
     --alerta: #9A5B00;
     --erro: #B42318;
 
-    --raio-card: 18px;
-    --raio-campo: 12px;
-    --sombra-card: 0 1px 2px rgba(16, 40, 36, 0.05),
-                   0 12px 32px -16px rgba(16, 40, 36, 0.22);
-    --sombra-flutuante: 0 1px 2px rgba(16, 40, 36, 0.08),
-                        0 28px 60px -20px rgba(16, 40, 36, 0.42);
-    --anel-foco: 0 0 0 4px rgba(8, 178, 163, 0.18);
+    --raio-card: 12px;
+    --raio-campo: 8px;
+    --sombra-card: 0 1px 2px rgba(16, 40, 36, 0.06);
+    --sombra-flutuante: 0 1px 3px rgba(16, 40, 36, 0.1), 0 14px 32px -14px rgba(16, 40, 36, 0.3);
+    --anel-foco: 0 0 0 3px rgba(8, 178, 163, 0.18);
 
     --fonte: "Plus Jakarta Sans", "Segoe UI", system-ui, -apple-system,
              Roboto, Arial, sans-serif;
@@ -52,11 +50,9 @@ body.escuro {
     --alerta: #F2B04C;
     --erro: #FF8A80;
 
-    --sombra-card: 0 1px 2px rgba(0, 0, 0, 0.3),
-                   0 12px 32px -16px rgba(0, 0, 0, 0.6);
-    --sombra-flutuante: 0 1px 2px rgba(0, 0, 0, 0.4),
-                        0 28px 60px -20px rgba(0, 0, 0, 0.8);
-    --anel-foco: 0 0 0 4px rgba(8, 178, 163, 0.28);
+    --sombra-card: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --sombra-flutuante: 0 1px 3px rgba(0, 0, 0, 0.4), 0 14px 32px -14px rgba(0, 0, 0, 0.7);
+    --anel-foco: 0 0 0 3px rgba(8, 178, 163, 0.28);
 
     color-scheme: dark;
 }
@@ -98,10 +94,10 @@ img {
 
 h1 {
     margin: 0 0 6px;
-    font-size: 28px;
-    font-weight: 800;
+    font-size: 26px;
+    font-weight: 700;
     line-height: 1.15;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.02em;
 }
 
 h2 {
@@ -200,7 +196,7 @@ textarea:focus-visible {
     width: fit-content;
     margin: 0 0 24px 4px;
     padding: 0;
-    border-radius: 12px;
+    border-radius: 8px;
 }
 
 .Menu > a:first-child:hover {
@@ -212,7 +208,7 @@ textarea:focus-visible {
     height: 48px;
     width: auto;
     padding: 5px;
-    border-radius: 12px;
+    border-radius: 8px;
     background: #FFFFFF;
     object-fit: contain;
     object-position: left;
@@ -227,7 +223,7 @@ textarea:focus-visible {
 .Menu a {
     display: block;
     padding: 10px 12px;
-    border-radius: 10px;
+    border-radius: 8px;
     color: var(--texto-medio);
     font-size: 14px;
     font-weight: 600;
@@ -258,7 +254,7 @@ textarea:focus-visible {
     margin-top: auto;
     padding: 14px;
     border: 1px solid var(--borda);
-    border-radius: 14px;
+    border-radius: 10px;
     background: var(--campo);
     font-size: 14px;
 }
@@ -302,11 +298,11 @@ textarea:focus-visible {
     align-items: center;
     justify-content: center;
     gap: 8px;
-    min-height: 42px;
+    min-height: 40px;
     padding: 0 18px;
-    border: 1.5px solid transparent;
+    border: 1px solid transparent;
     border-radius: var(--raio-campo);
-    font-weight: 700;
+    font-weight: 600;
     cursor: pointer;
     transition: background-color 0.2s, border-color 0.2s, transform 0.1s;
 }
@@ -319,7 +315,6 @@ textarea:focus-visible {
 .Botao {
     background: var(--verde);
     color: #FFFFFF;
-    box-shadow: 0 10px 22px -12px rgba(8, 178, 163, 0.8);
 }
 
 .Botao:hover {
@@ -327,21 +322,22 @@ textarea:focus-visible {
 }
 
 .Botao_Sec {
-    background: transparent;
+    background-color: #26a096;
     border-color: var(--borda);
-    color: var(--texto-medio);
+    color: #ffffff;
 }
 
 .Botao_Sec:hover {
-    background: var(--campo);
-    border-color: var(--borda-forte);
+    background: white;
+    border-color: #079A8D;
+    color: #079A8D;
 }
 
 .busca {
     min-width: 0;
-    height: 42px;
+    height: 40px;
     padding: 0 14px;
-    border: 1.5px solid var(--borda);
+    border: 1px solid var(--borda);
     border-radius: var(--raio-campo);
     outline: none;
     background: var(--superficie);
@@ -423,13 +419,17 @@ textarea:focus-visible {
     overflow-wrap: anywhere;
 }
 
+.linha_Grid > div:has(> input, > select, > textarea) {
+    padding: 6px 4px;
+}
+
 .Cabeçalho_Planilha > div {
     overflow-wrap: normal;
     white-space: nowrap;
 }
 
 .Cabeçalho_Planilha {
-    border-bottom: 1.5px solid var(--borda);
+    border-bottom: 1px solid var(--borda);
     color: var(--texto-suave);
     font-size: 13px;
     font-weight: 700;
@@ -478,7 +478,7 @@ textarea:focus-visible {
 }
 
 .Col7 {
-    grid-template-columns: 70px minmax(140px, 1fr) minmax(140px, 1fr) 110px 100px 100px 100px;
+    grid-template-columns: 70px minmax(140px, 1fr) minmax(140px, 1fr) 110px 110px 140px 130px;
 }
 
 .linha_Grid input,
@@ -491,8 +491,8 @@ textarea:focus-visible {
     height: 38px;
     margin: 0;
     padding: 0 10px;
-    border: 1.5px solid var(--borda);
-    border-radius: 9px;
+    border: 1px solid var(--borda);
+    border-radius: 8px;
     outline: none;
     background: var(--campo);
     color: var(--texto);
@@ -624,7 +624,7 @@ textarea:focus-visible {
     height: 48px;
     margin-bottom: 16px;
     padding: 0 16px;
-    border: 1.5px solid var(--borda);
+    border: 1px solid var(--borda);
     border-radius: var(--raio-campo);
     outline: none;
     background: var(--campo);
@@ -656,7 +656,7 @@ textarea:focus-visible {
     max-width: calc(100vw - 30px);
     padding: 16px;
     border: 1px solid var(--borda);
-    border-radius: 22px;
+    border-radius: 14px;
     background: var(--superficie);
     box-shadow: var(--sombra-flutuante);
 }
@@ -675,7 +675,7 @@ textarea:focus-visible {
     width: 32px;
     height: 32px;
     border: 0;
-    border-radius: 10px;
+    border-radius: 8px;
     background: none;
     color: var(--texto-suave);
     font-size: 22px;
@@ -693,7 +693,7 @@ textarea:focus-visible {
     margin-bottom: 12px;
     padding: 10px 14px;
     border: 1px solid var(--borda);
-    border-radius: 14px;
+    border-radius: 10px;
     background: var(--campo);
 }
 
@@ -723,7 +723,7 @@ textarea:focus-visible {
     min-width: 0;
     height: 44px;
     border: 1px solid var(--borda);
-    border-radius: 11px;
+    border-radius: 8px;
     background: var(--superficie);
     color: var(--texto);
     font-size: 17px;
@@ -793,7 +793,7 @@ textarea:focus-visible {
     }
 
     .Col7 {
-        grid-template-columns: 60px minmax(120px, 1fr) minmax(120px, 1fr) 90px 80px 80px 80px;
+        grid-template-columns: 60px minmax(120px, 1fr) minmax(120px, 1fr) 100px 100px 130px 120px;
     }
 
     .calc {
@@ -883,7 +883,7 @@ textarea:focus-visible {
 
 @media (max-width: 480px) {
     h1 {
-        font-size: 24px;
+        font-size: 22px;
     }
 
     .Menu {

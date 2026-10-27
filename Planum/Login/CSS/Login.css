@@ -1,4 +1,3 @@
-
 * {
     box-sizing: border-box;
 }
@@ -27,6 +26,7 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     color: var(--texto);
     background: var(--fundo);
+    background-image: url(../../Imagens/sabor.png);
 }
 
 .container-login,
@@ -53,15 +53,15 @@ body {
     min-width: 0;
     padding: 45px 55px;
     overflow: hidden;
-    color: #FFFFFF;
-    background: linear-gradient(145deg, #08B2A3, #07998E);
+    color: var(--texto);
+    background: #FFFFFF;
 }
 
 .painel-esquerdo::before,
 .painel-esquerdo::after {
     content: "";
     position: absolute;
-    border: 1px solid rgba(255, 255, 255, 0.13);
+    border: 1px solid rgba(8, 178, 163, 0.13);
     border-radius: 50%;
     pointer-events: none;
 }
@@ -109,7 +109,7 @@ body {
     position: relative;
     z-index: 1;
     margin: 8px 0 18px;
-    color: #FFFFFF;
+    color: var(--texto);
     font-size: 32px;
     line-height: 1.3;
     letter-spacing: -0.6px;
@@ -120,7 +120,7 @@ body {
     z-index: 1;
     max-width: 360px;
     margin: 0;
-    color: #F0FFFC;
+    color: var(--texto-suave);
     font-size: 14px;
     line-height: 1.9;
 }
@@ -130,6 +130,7 @@ body {
     font-size: 13px;
     font-weight: 600;
     letter-spacing: 0.5px;
+    color: var(--verde-escuro);
 }
 
 .detalhe-inferior {
@@ -139,7 +140,7 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
-    color: #F0FFFC;
+    color: var(--texto-suave);
     font-size: 12px;
 }
 
@@ -147,7 +148,7 @@ body {
     width: 7px;
     height: 7px;
     border-radius: 50%;
-    background: #FFFFFF;
+    background: var(--verde);
 }
 
 .painel-direito {
@@ -156,7 +157,8 @@ body {
     justify-content: center;
     min-width: 0;
     padding: 40px 48px;
-    background: #FFFFFF;
+    color: #FFFFFF;
+    background: linear-gradient(145deg, #08B2A3, #07998E);
 }
 
 .formulario-container {
@@ -171,7 +173,7 @@ body {
 
 .painel-direito h2 {
     margin: 0 0 10px;
-    color: #303936;
+    color: #FFFFFF;
     font-size: 29px;
     line-height: 1.25;
     letter-spacing: -0.6px;
@@ -179,7 +181,7 @@ body {
 
 .painel-direito .subtitulo {
     margin: 0;
-    color: var(--texto-suave);
+    color: #F0FFFC;
     font-size: 14px;
     line-height: 1.7;
 }
@@ -199,7 +201,7 @@ body {
 }
 
 .painel-direito label {
-    color: #424945;
+    color: #FFFFFF;
     font-size: 12px;
     font-weight: 700;
 }
@@ -214,7 +216,7 @@ body {
     border-radius: 8px;
     outline: none;
     background: #FAFAFA;
-    color: #303936;
+    color: var(--texto);
     font-family: Arial, Helvetica, sans-serif;
     font-size: 13px;
     transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
@@ -225,9 +227,9 @@ body {
 }
 
 .painel-direito input:focus {
-    border-color: var(--verde);
+    border-color: #FFFFFF;
     background: #FFFFFF;
-    box-shadow: 0 0 0 3px rgba(8, 178, 163, 0.12);
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
 }
 
 .painel-direito button {
@@ -248,37 +250,37 @@ body {
 .painel-direito button[type="submit"],
 .painel-direito .botao-entrar {
     margin-top: 8px;
-    background: var(--verde);
-    color: #FFFFFF;
+    background: #FFFFFF;
+    color: var(--verde-escuro);
 }
 
 .painel-direito button[type="submit"]:hover,
 .painel-direito .botao-entrar:hover {
-    background: var(--verde-escuro);
+    background: #E8FFFB;
 }
 
 .painel-direito button[type="button"],
 .painel-direito .botao-limpar {
-    background: #F1F1F1;
-    border-color: #E0E0E0;
-    color: #454B47;
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.45);
+    color: #FFFFFF;
 }
 
 .painel-direito button[type="button"]:hover,
 .painel-direito .botao-limpar:hover {
-    background: #E5E5E5;
+    background: rgba(255, 255, 255, 0.25);
 }
 
 .painel-direito button:focus-visible,
 .painel-direito a:focus-visible {
-    outline: 2px solid var(--verde);
+    outline: 2px solid #FFFFFF;
     outline-offset: 3px;
 }
 
 #Mensagem_de_Erro,
 #Mensagem_Erro {
     margin: 0;
-    color: #B42318;
+    color: #FFF0F0;
     font-size: 12px;
     line-height: 1.5;
 }
@@ -288,10 +290,10 @@ body {
     width: 100%;
     margin-top: 12px;
     padding: 12px;
-    border: 1px solid #DADADA;
+    border: 1px solid rgba(255, 255, 255, 0.4);
     border-radius: 8px;
-    background: #FFFFFF;
-    color: #555D58;
+    background: rgba(255, 255, 255, 0.12);
+    color: #FFFFFF;
     font-size: 13px;
     font-weight: 600;
     line-height: 1.5;
@@ -301,20 +303,20 @@ body {
 }
 
 .link-cadastro:hover {
-    background: #F5F5F5;
-    border-color: #BDBDBD;
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.65);
 }
 
 .link-cadastro a {
-    color: #555D58;
+    color: #FFFFFF;
     font-weight: 700;
     text-decoration: underline;
-    text-decoration-color: #A0A0A0;
+    text-decoration-color: rgba(255, 255, 255, 0.7);
 }
 
 .rodape-formulario {
     margin: 20px 0 0;
-    color: #858B87;
+    color: #F0FFFC;
     font-size: 11px;
     text-align: center;
 }
@@ -327,10 +329,10 @@ body {
     min-height: 47px;
     margin-top: 12px;
     padding: 12px 15px;
-    border: 1px solid #DADADA;
+    border: 1px solid rgba(255, 255, 255, 0.45);
     border-radius: 8px;
-    background: #FFFFFF;
-    color: #454B47;
+    background: rgba(255, 255, 255, 0.12);
+    color: #FFFFFF;
     font-size: 13px;
     font-weight: 700;
     text-align: center;
@@ -339,13 +341,13 @@ body {
 }
 
 .painel-direito .link-login:hover {
-    background: #F3F3F3;
-    border-color: #BDBDBD;
+    background: rgba(255, 255, 255, 0.22);
+    border-color: #FFFFFF;
 }
 
 .painel-direito .texto-conta {
     margin: 22px 0 10px;
-    color: #777F7B;
+    color: #F0FFFC;
     font-size: 12px;
     font-weight: 600;
 }

@@ -8,17 +8,44 @@ class TabelaVendas {
     }
 
     iniciar(){
+        // ao abrir a página, busca as vendas salvas no banco
+        this.carregar();
+
         this.botaoNovo.addEventListener('click', () => {
             this.adicionar();
             console.log("Tô conectado");
         });
     }
 
-    adicionar() {
+    // desenha cada venda que veio do banco (tive que pesquisar como faz, não é um codigo codigo inteiramente meu.)
+    async carregar() {
+        const lista = await Registros.listar('vendas');
+
+        lista.forEach(item => {
+            const d = item.dados;
+            const vendinhas = new Vendas(this.idVenda, d.produto, d.cliente, d.quantidade, d.valor, d.data, d.status);
+            vendinhas.criarLinhas();
+
+            vendinhas.idBanco = item.id;
+
+            this.tabela.appendChild(vendinhas.vendas);
+            this.idVenda++;
+        });
+    }
+
+    async adicionar() {
         const vendinhas = new Vendas(this.idVenda);
         vendinhas.criarLinhas();
-        this.tabela.appendChild(vendinhas.vendas);
         this.idVenda++;
+
+        // cria a venda no banco antes de mostrar a linha
+        await vendinhas.salvar();
+
+        if (vendinhas.idBanco === 0) {
+            return; // não salvou, então não mostra a linha
+        }
+
+        this.tabela.appendChild(vendinhas.vendas);
     }
 }
 
@@ -27,6 +54,7 @@ new TabelaVendas();
 class Vendas {
     constructor (id=0, produto='', cliente='', quantia=0, valor=0, data='', status='Pendente'){
         this.id=id;
+        this.idBanco=0;
         this.produto=produto;
         this.cliente=cliente;
         this.quantia=quantia;
@@ -92,5 +120,43 @@ class Vendas {
             this.criarCelula(this.campoData),
             this.criarCelula(this.campoStatus)
         );
+
+        //  ao terminar de editar um campo, salva no banco
+        [
+            this.campoProduto,
+            this.campoCliente,
+            this.campoQuantia,
+            this.campoValor,
+            this.campoData,
+            this.campoStatus
+        ].forEach(campo => {
+            campo.addEventListener('change', () => {
+                this.salvar();
+            });
+        });
+    }
+
+    // manda os dados para o banco
+    async salvar() {
+        this.produto = this.campoProduto.value.trim();
+        this.cliente = this.campoCliente.value.trim();
+        this.quantia = Number(this.campoQuantia.value);
+        this.valor = Number(this.campoValor.value);
+        this.data = this.campoData.value;
+        this.status = this.campoStatus.value;
+
+        // idBanco 0 = cria uma venda nova; maior que 0 = atualiza a que já existe
+        const novoId = await Registros.salvar('vendas', this.idBanco, {
+            produto: this.produto,
+            cliente: this.cliente,
+            quantidade: this.quantia,
+            valor: this.valor,
+            data: this.data,
+            status: this.status
+        });
+
+        if (novoId !== 0) {
+            this.idBanco = novoId;
+        }
     }
 }
