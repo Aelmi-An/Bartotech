@@ -322,14 +322,15 @@ textarea:focus-visible {
 }
 
 .Botao_Sec {
-    background: transparent;
+    background-color: #26a096;
     border-color: var(--borda);
-    color: var(--texto-medio);
+    color: #ffffff;
 }
 
 .Botao_Sec:hover {
-    background: var(--campo);
-    border-color: var(--borda-forte);
+    background: white;
+    border-color: #079A8D;
+    color: #079A8D;
 }
 
 .busca {

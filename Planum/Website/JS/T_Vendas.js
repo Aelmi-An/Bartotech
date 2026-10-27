@@ -1,3 +1,4 @@
+
 class TabelaVendas {
     constructor(){
         this.tabela = document.querySelector('#vendas .Caixa');
@@ -91,17 +92,5 @@ class Vendas {
             this.criarCelula(this.campoData),
             this.criarCelula(this.campoStatus)
         );
-
-        this.botaoApagar = document.createElement('button');
-        this.botaoApagar.type = 'button';
-        this.botaoApagar.className = 'apagar';
-        this.botaoApagar.title = 'Apagar linha';
-        this.botaoApagar.textContent = '×';
-        this.botaoApagar.addEventListener('click', () => {
-            if (confirm('Quer mesmo apagar esta linha?')) {
-                this.vendas.remove();
-            }
-        });
-        this.vendas.appendChild(this.botaoApagar);
     }
 }
