@@ -35,6 +35,7 @@ class Tema {
 
 
 
+
 class FiltroTabela {
     constructor(secao) {
         this.secao = secao;
@@ -51,20 +52,54 @@ class FiltroTabela {
             });
         }
 
-        let botoes = this.secao.querySelectorAll('.abas button');
+        const botoes = this.secao.querySelectorAll('.abas button');
 
         botoes.forEach(botao => {
             botao.addEventListener('click', () => {
-                this.secao.querySelector('.abas .ativa').classList.remove('ativa');
+                const ativa = this.secao.querySelector('.abas button.ativa');
+
+                if (ativa) {
+                    ativa.classList.remove('ativa');
+                }
 
                 botao.classList.add('ativa');
-
                 this.ramo = botao.dataset.ramo;
 
                 this.filtrar();
             });
         });
     }
+
+    textoDaLinha(linha) {
+        return Array.from(linha.querySelectorAll('div, input, select, textarea'))
+            .map(elemento => {
+                if (elemento.matches('input, select, textarea')) {
+                    return elemento.value;
+                }
+
+                return elemento.textContent;
+            })
+            .join(' ')
+            .toLowerCase();
+    }
+
+    filtrar() {
+        const texto = this.campo
+            ? this.campo.value.trim().toLowerCase()
+            : '';
+
+        const linhas = this.secao.querySelectorAll(
+            '.Caixa > .linha_Grid, .Estoque > .linha_Grid'
+        );
+
+        linhas.forEach(linha => {
+            const corresponde = this.textoDaLinha(linha).includes(texto);
+
+            linha.hidden = !corresponde;
+        });
+    }
+}
+
 
     // junta o texto de cada célula; nos campos de digitar, usa o valor deles
     textoDaLinha(linha) {
