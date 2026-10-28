@@ -64,7 +64,7 @@ class Financas {
 
     criarLinhas() {
         this.financa = document.createElement('div');
-        this.financa.classList.add('linha_Grid', 'Col5');
+        this.financa.classList.add('linha_Grid', 'Col6');
 
         this.campoTipo = document.createElement('select');
         ['Entrada', 'Saída'].forEach(tipo => {
@@ -107,7 +107,8 @@ class Financas {
             this.criarCelula(this.campoDescricao),
             this.criarCelula(this.campoValor),
             this.criarCelula(this.campoData),
-            this.criarCelula(this.campoStatus)
+            this.criarCelula(this.campoStatus),
+            this.criarCelulaDeletar()
         );
 
         // ao terminar de editar um campo, salva no banco
@@ -122,6 +123,21 @@ class Financas {
                 this.salvar();
             });
         });
+    }
+
+    criarCelulaDeletar() {
+        const celula = document.createElement('div');
+        const botao = document.createElement('button');
+        botao.type = 'button';
+        botao.classList.add('Botao_Sec');
+        botao.textContent = 'Deletar';
+        botao.addEventListener('click', async () => {
+            if (await Registros.remover('financas', this.idBanco)) {
+                this.financa.remove();
+            }
+        });
+        celula.appendChild(botao);
+        return celula;
     }
 
     // manda os dados para o banco

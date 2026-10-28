@@ -327,6 +327,12 @@ textarea:focus-visible {
     color: #ffffff;
 }
 
+.linha_Grid .Botao_Sec {
+    min-height: 32px;
+    padding: 0 8px;
+    font-size: 12px;
+}
+
 .Botao_Sec:hover {
     background: white;
     border-color: #079A8D;
@@ -474,12 +480,17 @@ textarea:focus-visible {
 }
 
 .Col6 {
-    grid-template-columns: 100px minmax(140px, 1fr) 120px 100px 120px 120px;
+    grid-template-columns: 1fr 2fr 1fr 1fr 1fr 110px;
 }
 
 .Col7 {
-    grid-template-columns: 70px minmax(140px, 1fr) minmax(140px, 1fr) 110px 110px 140px 130px;
+    grid-template-columns: 80px minmax(120px, 1fr) 100px 90px 100px 100px 110px;
 }
+
+.Col8 {
+    grid-template-columns:55px minmax(150px, 1.4fr) minmax(150px, 1.4fr)95px 110px 155px 110px 125px;min-width: 1050px;
+}
+
 
 .linha_Grid input,
 .linha_Grid select,
@@ -789,11 +800,15 @@ textarea:focus-visible {
     }
 
     .Col6 {
-        grid-template-columns: 80px minmax(120px, 1fr) 100px 90px 100px 100px;
+        grid-template-columns: 1fr 2fr 1fr 1fr 1fr 100px;
     }
 
     .Col7 {
-        grid-template-columns: 60px minmax(120px, 1fr) minmax(120px, 1fr) 100px 100px 130px 120px;
+        grid-template-columns: 70px minmax(110px, 1fr) 90px 80px 90px 90px 100px;
+    }
+
+    .Col8 {
+        grid-template-columns: 55px minmax(110px, 1fr) minmax(110px, 1fr) 90px 90px 110px 100px 100px;
     }
 
     .calc {
@@ -1020,5 +1035,198 @@ textarea:focus-visible {
     .Menu a:hover,
     .teclas button:hover {
         transition: none;
+    }
+}
+
+#vendas .linha_Grid {
+    grid-template-columns:
+        55px
+        minmax(150px, 1.4fr)
+        minmax(150px, 1.4fr)
+        95px
+        110px
+        155px
+        110px
+        125px;
+    min-width: 1050px;
+}
+
+#vendas .linha_Grid > div:last-child {
+    display: flex;
+    align-items: center;
+    justify-content: stretch;
+    gap: 6px;
+    padding: 6px 8px;
+    min-width: 0;
+}
+
+#vendas .linha_Grid > div:last-child button {
+    flex: 1 1 0;
+    min-width: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0 8px;
+    white-space: nowrap;
+}
+
+.Menu > .Logo {
+    display: block;
+    width: fit-content;
+    max-width: 100%;
+    margin: 0 0 24px 4px;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    line-height: 0;
+}
+
+.Menu > .Logo:hover {
+    background: transparent;
+}
+
+.Menu > .Logo img {
+    display: block;
+    width: auto;
+    height: 48px;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    object-fit: contain;
+    object-position: left center;
+}
+
+.Menu > .Logo .Logo-clara {
+    display: block;
+}
+
+.Menu > .Logo .Logo-escura {
+    display: none;
+}
+
+body.escuro .Menu > .Logo .Logo-clara {
+    display: none;
+}
+
+body.escuro .Menu > .Logo .Logo-escura {
+    display: block;
+}
+
+
+/* CORREÇÕES DA TABELA DE VENDAS */
+#vendas .Cabeçalho_Planilha.Col8,
+#vendas .linha_Grid.Col8 {
+    min-width: 1050px;
+}
+
+#vendas .linha_Grid > div:last-child {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 8px;
+    min-width: 0;
+}
+
+#vendas .linha_Grid > div:last-child button {
+    flex: 1 1 0;
+    min-width: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0 8px;
+    white-space: nowrap;
+}
+
+/* CAMPOS DE DATA */
+#vendas .linha_Grid input[type="date"] {
+    width: 100%;
+    min-width: 145px;
+}
+
+@media (max-width: 800px) {
+    .Menu > .Logo {
+        margin-bottom: 12px;
+    }
+
+    .Menu > .Logo img {
+        height: 44px;
+    }
+}
+
+
+#vendas .linha_Grid > div:last-child,
+#estoque .linha_Grid > div:last-child,
+#financeiro .linha_Grid > div:last-child,
+#marketing .linha_Grid > div:last-child {
+    display: flex;
+    align-items: center;
+    justify-content: stretch;
+    gap: 6px;
+    min-width: 0;
+    padding: 6px 8px;
+}
+
+#vendas .linha_Grid > div:last-child button,
+#estoque .linha_Grid > div:last-child button,
+#financeiro .linha_Grid > div:last-child button,
+#marketing .linha_Grid > div:last-child button {
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: 100%;
+    min-height: 34px;
+    margin: 0;
+    padding: 0 8px;
+    white-space: nowrap;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#vendas .linha_Grid button.excluir,
+#estoque .linha_Grid button.excluir,
+#financeiro .linha_Grid button.excluir,
+#marketing .linha_Grid button.excluir,
+#vendas .linha_Grid button[data-acao="excluir"],
+#estoque .linha_Grid button[data-acao="excluir"],
+#financeiro .linha_Grid button[data-acao="excluir"],
+#marketing .linha_Grid button[data-acao="excluir"] {
+    border: 1px solid var(--erro);
+    border-radius: 7px;
+    background: transparent;
+    color: var(--erro);
+    cursor: pointer;
+    font-weight: 600;
+}
+
+#vendas .linha_Grid button.excluir:hover,
+#estoque .linha_Grid button.excluir:hover,
+#financeiro .linha_Grid button.excluir:hover,
+#marketing .linha_Grid button.excluir:hover,
+#vendas .linha_Grid button[data-acao="excluir"]:hover,
+#estoque .linha_Grid button[data-acao="excluir"]:hover,
+#financeiro .linha_Grid button[data-acao="excluir"]:hover,
+#marketing .linha_Grid button[data-acao="excluir"]:hover {
+    background: var(--erro);
+    color: #FFFFFF;
+}
+
+@media (max-width: 800px) {
+    #vendas .linha_Grid > div:last-child,
+    #estoque .linha_Grid > div:last-child,
+    #financeiro .linha_Grid > div:last-child,
+    #marketing .linha_Grid > div:last-child {
+        gap: 5px;
+        padding: 6px;
+    }
+
+    #vendas .linha_Grid > div:last-child button,
+    #estoque .linha_Grid > div:last-child button,
+    #financeiro .linha_Grid > div:last-child button,
+    #marketing .linha_Grid > div:last-child button {
+        min-height: 36px;
+        padding: 0 6px;
     }
 }

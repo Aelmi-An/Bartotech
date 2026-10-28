@@ -62,7 +62,7 @@ class Marketing {
 
     criarLinha() {
         this.marketear = document.createElement('div');
-        this.marketear.classList.add('linha_Grid', 'Col4');
+        this.marketear.classList.add('linha_Grid', 'Col5');
 
         this.campoCamp = document.createElement('input');
         this.campoCamp.type = 'text';
@@ -93,7 +93,8 @@ class Marketing {
             this.criarCelula(this.campoCamp),
             this.criarCelula(this.campoPlat),
             this.criarCelula(this.campoDatas),
-            this.criarCelula(this.campoStatuss)
+            this.criarCelula(this.campoStatuss),
+            this.criarCelulaDeletar()
         );
 
         // ao terminar de editar um campo, salva no banco
@@ -107,6 +108,21 @@ class Marketing {
                 this.salvar();
             });
         });
+    }
+
+    criarCelulaDeletar() {
+        const celula = document.createElement('div');
+        const botao = document.createElement('button');
+        botao.type = 'button';
+        botao.classList.add('Botao_Sec');
+        botao.textContent = 'Deletar';
+        botao.addEventListener('click', async () => {
+            if (await Registros.remover('marketing', this.idBanco)) {
+                this.marketear.remove();
+            }
+        });
+        celula.appendChild(botao);
+        return celula;
     }
 
     // manda os dados para o banco

@@ -12,7 +12,15 @@
 <div class="Pagina">
 
 <div class="Menu">
-    <a href="Início.html"><img src="../../Imagens/Logo.png" alt="Planum"></a>
+    <a href="Início.html" class="Logo">
+            <img class="Logo-clara"
+                 src="../../Imagens/Logo.png"
+                 alt="Planum">
+
+            <img class="Logo-escura"
+                 src="../../Imagens/Logo_du_mal.png"
+                 alt="Planum">
+    </a>
     <nav>
         <a href="Início.html">Início</a>
         <a href="Tabelas.html#tabelas">Tabelas</a>
@@ -42,17 +50,6 @@
             <dt>Nome</dt><dd data-conta="nome">—</dd>
             <dt>E-mail</dt><dd data-conta="email">—</dd>
         </dl>
-        <button class="Botao_Sec" type="button" id="editar-conta">Editar informações</button>
-        <form id="form-conta" hidden>
-            <label for="nome-conta">Nome</label>
-            <input type="text" id="nome-conta" required>
-            <label for="email-conta">E-mail</label>
-            <input type="email" id="email-conta" required>
-            <div class="Acoes">
-                <button class="Botao" type="submit">Salvar</button>
-                <button class="Botao_Sec" type="button" id="cancelar-conta">Cancelar</button>
-            </div>
-        </form>
     </div>
 
     <div class="Bloco">

@@ -61,7 +61,7 @@ class Produto {
 
     criarLinha() {
         this.linha = document.createElement('div');
-        this.linha.classList.add('linha_Grid', 'Col6');
+        this.linha.classList.add('linha_Grid', 'Col7');
 
         const id = document.createElement('div');
         id.textContent = String(this.id).padStart('0');
@@ -114,7 +114,23 @@ class Produto {
             this.campoUnidade,
             this.campoPreco,
             this.status,
+            this.criarCelulaDeletar(),
         );
+    }
+
+    criarCelulaDeletar() {
+        const celula = document.createElement('div');
+        const botao = document.createElement('button');
+        botao.type = 'button';
+        botao.classList.add('Botao_Sec');
+        botao.textContent = 'Deletar';
+        botao.addEventListener('click', async () => {
+            if (await Registros.remover('estoque', this.idBanco)) {
+                this.linha.remove();
+            }
+        });
+        celula.appendChild(botao);
+        return celula;
     }
 
     atualizarStatus() {

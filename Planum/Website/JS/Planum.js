@@ -328,85 +328,32 @@ class Navegacao {
 
 class MinhaConta {
     constructor() {
-        this.form = document.getElementById('form-conta');
-        this.botaoEditar = document.getElementById('editar-conta');
-        this.botaoCancelar = document.getElementById('cancelar-conta');
-        this.campoNome = document.getElementById('nome-conta');
-        this.campoEmail = document.getElementById('email-conta');
-
-        this.mostrarDados();
-
-        if (!this.form || !this.botaoEditar || !this.botaoCancelar ||
-            !this.campoNome || !this.campoEmail) {
-            return;
-        }
-
-        this.iniciar();
+        this.carregarDados();
     }
 
-    iniciar() {
-        this.botaoEditar.addEventListener('click', () => {
-            this.campoNome.value = this.lerDado('planum-nome');
-            this.campoEmail.value = this.lerDado('planum-email');
-
-            this.form.hidden = false;
-            this.botaoEditar.hidden = true;
-            this.campoNome.focus();
-        });
-
-        this.botaoCancelar.addEventListener('click', () => {
-            this.form.reset();
-            this.form.hidden = true;
-            this.botaoEditar.hidden = false;
-        });
-
-        this.form.addEventListener('submit', evento => {
-            evento.preventDefault();
-
-            let nome = this.campoNome.value.trim();
-            let email = this.campoEmail.value.trim();
-
-            if (nome === '' || email === '') {
-                return;
-            }
-
-            try {
-                localStorage.setItem('planum-nome', nome);
-                localStorage.setItem('planum-email', email);
-            } catch (erro) {
-                alert('Não foi possível salvar os dados neste navegador.');
-                return;
-            }
-
-            this.mostrarDados();
-            this.form.hidden = true;
-            this.botaoEditar.hidden = false;
-        });
-    }
-
-    lerDado(chave) {
+    async carregarDados() {
         try {
-            return localStorage.getItem(chave) || '';
+            const resposta = await fetch('../PHP_SQL/Conta.php');
+            const resultado = await resposta.json();
+
+            if (!resposta.ok) {
+                throw new Error(resultado.erro || 'Não foi possível carregar os dados da conta.');
+            }
+
+            this.aplicarDados(resultado.nome, resultado.email);
         } catch (erro) {
-            return '';
+            alert(erro.message || 'Não foi possível carregar os dados da conta.');
         }
     }
 
-    mostrarDados() {
-        let nome = this.lerDado('planum-nome');
-        let email = this.lerDado('planum-email');
+    aplicarDados(nome, email) {
+        document.querySelectorAll('[data-conta="nome"]').forEach(campo => {
+            campo.textContent = nome;
+        });
 
-        if (nome) {
-            document.querySelectorAll('[data-conta="nome"]').forEach(campo => {
-                campo.textContent = nome;
-            });
-        }
-
-        if (email) {
-            document.querySelectorAll('[data-conta="email"]').forEach(campo => {
-                campo.textContent = email;
-            });
-        }
+        document.querySelectorAll('[data-conta="email"]').forEach(campo => {
+            campo.textContent = email;
+        });
     }
 }
 

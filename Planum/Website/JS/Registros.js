@@ -34,5 +34,38 @@ const Registros = {
 
         const resultado = await resposta.json();
         return Number(resultado.id);
+    },
+
+    async remover(tabela, id) {
+        const form = new FormData();
+        form.append('acao', 'deletar');
+        form.append('tabela', tabela);
+        form.append('id', id);
+
+        let resposta;
+        try {
+            resposta = await fetch(this.url, {
+                method: 'POST',
+                body: form
+            });
+        } catch (erro) {
+            alert('Falha de comunicação ao deletar o registro.');
+            return false;
+        }
+
+        let resultado;
+        try {
+            resultado = await resposta.json();
+        } catch (erro) {
+            alert('O servidor retornou uma resposta inválida ao deletar.');
+            return false;
+        }
+
+        if (!resposta.ok || resultado.sucesso !== true) {
+            alert(resultado.erro || 'Não foi possível deletar o registro.');
+            return false;
+        }
+
+        return true;
     }
 };

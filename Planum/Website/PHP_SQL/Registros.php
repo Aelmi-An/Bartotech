@@ -1,6 +1,6 @@
 <?php
 require  'Base.php';
-
+//------->  Aqui eu tive que pesquisar como fazer, eu não sabia como fazer isso funcionar  <--------
 // Só estas tabelas do site podem ser salvas
 $permitidas = ['estoque', 'financas', 'vendas', 'marketing'];
 
@@ -33,6 +33,35 @@ if ($acao === 'listar') {
     }
 
     echo json_encode($lista);
+    exit;
+}
+
+if ($acao === 'deletar') {
+    $id = (int) ($_POST['id'] ?? 0);
+
+    if ($id <= 0) {
+        http_response_code(400);
+        echo json_encode(['erro' => 'Registro inválido']);
+        exit;
+    }
+
+    $stmt = mysqli_prepare($conexao,
+        "DELETE FROM registros
+         WHERE id = ? AND usuario_id = ? AND tabela = ?");
+    mysqli_stmt_bind_param($stmt, 'iis', $id, $usuario_id, $tabela);
+    if (!mysqli_stmt_execute($stmt)) {
+        http_response_code(500);
+        echo json_encode(['erro' => 'Não foi possível deletar o registro']);
+        exit;
+    }
+
+    if (mysqli_stmt_affected_rows($stmt) < 1) {
+        http_response_code(404);
+        echo json_encode(['erro' => 'Registro não encontrado']);
+        exit;
+    }
+
+    echo json_encode(['sucesso' => true]);
     exit;
 }
 

@@ -71,7 +71,7 @@ class Vendas {
 
     criarLinhas(){
         this.vendas = document.createElement('div');
-        this.vendas.classList.add('linha_Grid', 'Col7');
+        this.vendas.classList.add('linha_Grid', 'Col8');
 
         const id = document.createElement('div');
         id.textContent = String(this.id).padStart(1);
@@ -118,7 +118,8 @@ class Vendas {
             this.criarCelula(this.campoQuantia),
             this.criarCelula(this.campoValor),
             this.criarCelula(this.campoData),
-            this.criarCelula(this.campoStatus)
+            this.criarCelula(this.campoStatus),
+            this.criarCelulaDeletar()
         );
 
         //  ao terminar de editar um campo, salva no banco
@@ -134,6 +135,21 @@ class Vendas {
                 this.salvar();
             });
         });
+    }
+
+    criarCelulaDeletar() {
+        const celula = document.createElement('div');
+        const botao = document.createElement('button');
+        botao.type = 'button';
+        botao.classList.add('Botao_Sec');
+        botao.textContent = 'Deletar';
+        botao.addEventListener('click', async () => {
+            if (await Registros.remover('vendas', this.idBanco)) {
+                this.vendas.remove();
+            }
+        });
+        celula.appendChild(botao);
+        return celula;
     }
 
     // manda os dados para o banco
