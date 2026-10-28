@@ -1,5 +1,6 @@
 <?php
 require  'Base.php';
+$conexao = mysqli_connect('localhost', 'root', '', 'Bartotech');
 //------->  Aqui eu tive que pesquisar como fazer, eu não sabia como fazer isso funcionar  <--------
 // Só estas tabelas do site podem ser salvas
 $permitidas = ['estoque', 'financas', 'vendas', 'marketing'];

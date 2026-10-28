@@ -1,68 +1,128 @@
 
 class TabelaVendas {
-    constructor(){
+    constructor() {
         this.tabela = document.querySelector('#vendas .Caixa');
         this.botaoNovo = document.getElementById('NovaVenda');
         this.idVenda = 1;
+
         this.iniciar();
     }
 
-    iniciar(){
+    iniciar() {
+        // Ao abrir a página, carrega as vendas salvas
+        this.carregar();
+
         this.botaoNovo.addEventListener('click', () => {
             this.adicionar();
-            console.log("Tô conectado");
         });
     }
 
-    adicionar() {
-        const vendinhas = new Vendas(this.idVenda);
-        vendinhas.criarLinhas();
-        this.tabela.appendChild(vendinhas.vendas);
+    // Busca as vendas no banco e monta as linhas no HTML
+    async carregar() {
+        try {
+            const lista = await Registros.listar('vendas');
+
+            lista.forEach(item => {
+                const d = item.dados;
+
+                const venda = new Vendas(
+                    this.idVenda,
+                    d.produto ?? '',
+                    d.cliente ?? '',
+                    d.quantidade ?? 0,
+                    d.valor ?? 0,
+                    d.data ?? '',
+                    d.status ?? 'Pendente'
+                );
+
+                // Guarda o ID verdadeiro do banco
+                venda.idBanco = Number(item.id);
+
+                this.tabela.appendChild(venda.vendas);
+                this.idVenda++;
+            });
+        } catch (erro) {
+            console.error('Erro ao carregar vendas:', erro);
+        }
+    }
+
+    // Cria o registro no banco antes de mostrar a linha
+    async adicionar() {
+        const venda = new Vendas(this.idVenda);
         this.idVenda++;
+
+        try {
+            await venda.salvar();
+
+            if (venda.idBanco === 0) {
+                console.error('Não foi possível salvar a nova venda.');
+                return;
+            }
+
+            this.tabela.appendChild(venda.vendas);
+        } catch (erro) {
+            console.error('Erro ao adicionar venda:', erro);
+        }
     }
 }
 
-new TabelaVendas();
 
 class Vendas {
-    constructor (id=0, produto='', cliente='', quantia=0, valor=0, data='', status='Pendente'){
-        this.id=id;
-        this.produto=produto;
-        this.cliente=cliente;
-        this.quantia=quantia;
-        this.valor=valor;
-        this.data=data;
-        this.status=status;
+    constructor(
+        id,
+        produto = '',
+        cliente = '',
+        quantia = 0,
+        valor = 0,
+        data = '',
+        status = 'Pendente'
+    ) {
+        this.id = id;
+        this.idBanco = 0;
+
+        this.produto = produto;
+        this.cliente = cliente;
+        this.quantia = quantia;
+        this.valor = valor;
+        this.data = data;
+        this.status = status;
+
+        this.criarLinhas();
     }
 
-    criarCelula(coisinha) {
+    criarCelula(elemento) {
         const celula = document.createElement('div');
-        celula.appendChild(coisinha);
+        celula.appendChild(elemento);
         return celula;
     }
 
-    criarLinhas(){
+    criarLinhas() {
         this.vendas = document.createElement('div');
         this.vendas.classList.add('linha_Grid', 'Col8');
 
+        // ID visual da venda
         const id = document.createElement('div');
-        id.textContent = String(this.id).padStart(1);
+        id.textContent = String(this.id);
 
+        // Produto
         this.campoProduto = document.createElement('input');
         this.campoProduto.type = 'text';
         this.campoProduto.placeholder = 'Produto';
         this.campoProduto.value = this.produto;
 
+        // Cliente
         this.campoCliente = document.createElement('input');
         this.campoCliente.type = 'text';
         this.campoCliente.placeholder = 'Cliente';
         this.campoCliente.value = this.cliente;
 
+        // Quantidade
         this.campoQuantia = document.createElement('input');
         this.campoQuantia.type = 'number';
         this.campoQuantia.min = '0';
         this.campoQuantia.value = this.quantia;
 
+        // Valor
         this.campoValor = document.createElement('input');
         this.campoValor.type = 'number';
         this.campoValor.min = '0';
@@ -70,19 +130,24 @@ class Vendas {
         this.campoValor.placeholder = '0,00';
         this.campoValor.value = this.valor;
 
+        // Data
         this.campoData = document.createElement('input');
         this.campoData.type = 'date';
         this.campoData.value = this.data;
 
+        // Status
         this.campoStatus = document.createElement('select');
-        ['Efetuada','Em Andamento','Pendente'].forEach(status => {
+
+        ['Efetuada', 'Em Andamento', 'Pendente'].forEach(status => {
             const opcao = document.createElement('option');
             opcao.value = status;
             opcao.textContent = status;
             this.campoStatus.appendChild(opcao);
         });
+
         this.campoStatus.value = this.status;
 
+        // Monta a linha completa
         this.vendas.append(
             this.criarCelula(id),
             this.criarCelula(this.campoProduto),
@@ -94,7 +159,7 @@ class Vendas {
             this.criarCelulaDeletar()
         );
 
-        //  ao terminar de editar um campo, salva no banco
+        // Salva quando o usuário termina de editar
         [
             this.campoProduto,
             this.campoCliente,
@@ -109,22 +174,40 @@ class Vendas {
         });
     }
 
+    // Botão para excluir a venda
     criarCelulaDeletar() {
         const celula = document.createElement('div');
         const botao = document.createElement('button');
+
         botao.type = 'button';
         botao.classList.add('Botao_Sec');
         botao.textContent = 'Deletar';
+
         botao.addEventListener('click', async () => {
-            if (await Registros.remover('vendas', this.idBanco)) {
-                this.vendas.remove();
+            try {
+                if (this.idBanco === 0) {
+                    this.vendas.remove();
+                    return;
+                }
+
+                const removido = await Registros.remover(
+                    'vendas',
+                    this.idBanco
+                );
+
+                if (removido) {
+                    this.vendas.remove();
+                }
+            } catch (erro) {
+                console.error('Erro ao excluir venda:', erro);
             }
         });
+
         celula.appendChild(botao);
         return celula;
     }
 
-    // manda os dados para o banco
+    // Salva uma venda nova ou atualiza uma existente
     async salvar() {
         this.produto = this.campoProduto.value.trim();
         this.cliente = this.campoCliente.value.trim();
@@ -133,18 +216,33 @@ class Vendas {
         this.data = this.campoData.value;
         this.status = this.campoStatus.value;
 
-        // idBanco 0 = cria uma venda nova; maior que 0 = atualiza a que já existe
-        const novoId = await Registros.salvar('vendas', this.idBanco, {
-            produto: this.produto,
-            cliente: this.cliente,
-            quantidade: this.quantia,
-            valor: this.valor,
-            data: this.data,
-            status: this.status
-        });
+        const novoId = await Registros.salvar(
+            'vendas',
+            this.idBanco,
+            {
+                produto: this.produto,
+                cliente: this.cliente,
+                quantidade: this.quantia,
+                valor: this.valor,
+                data: this.data,
+                status: this.status
+            }
+        );
 
-        if (novoId !== 0) {
-            this.idBanco = novoId;
+        if (novoId && novoId !== 0) {
+            this.idBanco = Number(novoId);
         }
+
+        return this.idBanco;
     }
+}
+
+
+// Inicializa a tabela depois que o HTML estiver disponível
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        new TabelaVendas();
+    });
+} else {
+    new TabelaVendas();
 }

@@ -1,7 +1,7 @@
 <?php
 require 'Base.php';
 //------->  Aqui eu tive que pesquisar como fazer, eu não sabia como fazer isso funcionar  <--------
-
+$conexao = mysqli_connect('localhost', 'root', '', 'Bartotech');
 $stmt = mysqli_prepare($conexao,
     "SELECT nome, email
      FROM cadastro
