@@ -1,3 +1,4 @@
+
 class TabelaEstoque {
     constructor() {
         this.tabela = document.querySelector('.Estoque');
@@ -8,54 +9,84 @@ class TabelaEstoque {
     }
 
     iniciar() {
-        // ao abrir a pagina, busca os prdutos salvos no banco
+        if (!this.tabela || !this.botaoNovo) {
+            console.error('Tabela de estoque ou botão Novo Produto não encontrado.');
+            return;
+        }
+
         this.carregar();
 
-        this.botaoNovo.addEventListener('click', () => {this.adicionar(); console.log("conectado")});
-    }
-
-    // forma cada produto que veio do banco (tive que pesquisar como faz, não é um codigo codigo inteiramente meu.)
-    async carregar() {
-        const lista = await Registros.listar('estoque');
-
-        lista.forEach(item => {
-            const d = item.dados;
-            const produto = new Produto(this.idProduto, d.nome, d.quantidade, d.unidade, d.preco);
-
-            produto.idBanco = item.id;
-
-            this.tabela.appendChild(produto.linha);
-            this.idProduto++;
+        this.botaoNovo.addEventListener('click', () => {
+            this.adicionar();
         });
     }
 
-    async adicionar() {
-        const produto = new Produto(this.idProduto);
-        this.idProduto++;
+    async carregar() {
+        try {
+            const lista = await Registros.listar('estoque');
 
-        // cria o produto no banco antes de mostrar a linha
-        await produto.salvar();
+            if (!Array.isArray(lista)) {
+                console.error('A resposta dos registros não é uma lista.');
+                return;
+            }
 
-        if (produto.idBanco === 0) {
-            return; // não salvou, então não mostra a linha
+            lista.forEach(item => {
+                const d = item.dados;
+
+                if (!d) return;
+
+                const produto = new Produto(
+                    this.idProduto,
+                    d.nome ?? '',
+                    d.quantidade ?? 0,
+                    d.unidade ?? 'UN',
+                    d.preco ?? 0
+                );
+
+                produto.idBanco = Number(item.id) || 0;
+
+                this.tabela.appendChild(produto.linha);
+                this.idProduto++;
+            });
+        } catch (erro) {
+            console.error('Erro ao carregar os produtos:', erro);
+            alert('Não foi possível carregar o estoque. Verifique a conexão com o servidor.');
         }
+    }
 
-        this.tabela.appendChild(produto.linha);
+    async adicionar() {
+        const botao = this.botaoNovo;
+        botao.disabled = true;
+
+        try {
+            const produto = new Produto(this.idProduto);
+
+            await produto.salvar();
+
+            if (produto.idBanco === 0) {
+                return;
+            }
+
+            this.tabela.appendChild(produto.linha);
+            this.idProduto++;
+        } catch (erro) {
+            console.error('Erro ao adicionar produto:', erro);
+            alert('Não foi possível adicionar o produto. Verifique o console do navegador (F12).');
+        } finally {
+            botao.disabled = false;
+        }
     }
 }
 
-new TabelaEstoque();
-
-
 class Produto {
-    constructor(id, nome = '', quantidade = 0, unidade = 'UN', preco = 0, deletar='') {
+    constructor(id, nome = '', quantidade = 0, unidade = 'UN', preco = 0) {
         this.id = id;
         this.idBanco = 0;
         this.nome = nome;
         this.quantidade = quantidade;
         this.unidade = unidade;
         this.preco = preco;
-        this.deletar = deletar;
+
         this.criarLinha();
     }
 
@@ -64,7 +95,7 @@ class Produto {
         this.linha.classList.add('linha_Grid', 'Col7');
 
         const id = document.createElement('div');
-        id.textContent = String(this.id).padStart('0');
+        id.textContent = this.id;
 
         this.campoNome = document.createElement('input');
         this.campoNome.type = 'text';
@@ -100,8 +131,12 @@ class Produto {
             this.atualizarStatus();
         });
 
-        // ao terminar de editar um campo, salva no banco
-        [this.campoNome, this.campoQuantidade, this.campoUnidade, this.campoPreco].forEach(campo => {
+        [
+            this.campoNome,
+            this.campoQuantidade,
+            this.campoUnidade,
+            this.campoPreco
+        ].forEach(campo => {
             campo.addEventListener('change', () => {
                 this.salvar();
             });
@@ -134,7 +169,9 @@ class Produto {
     }
 
     atualizarStatus() {
-        const quantidade = Number(this.campoQuantidade?.value ?? this.quantidade);
+        const quantidade = Number(
+            this.campoQuantidade?.value ?? this.quantidade
+        );
 
         if (quantidade <= 0) {
             this.status.textContent = 'Sem estoque';
@@ -147,7 +184,6 @@ class Produto {
         }
     }
 
-    // manda os dados para o banco
     async salvar() {
         this.nome = this.campoNome.value.trim();
         this.quantidade = Number(this.campoQuantidade.value);
@@ -156,16 +192,28 @@ class Produto {
 
         this.atualizarStatus();
 
-        // se idBanco = 0 cria um produto novo, maior que 0 = atualiza o que já existe
-        const novoId = await Registros.salvar('estoque', this.idBanco, {
-            nome: this.nome,
-            quantidade: this.quantidade,
-            unidade: this.unidade,
-            preco: this.preco
-        });
+        try {
+            const novoId = await Registros.salvar(
+                'estoque',
+                this.idBanco,
+                {
+                    nome: this.nome,
+                    quantidade: this.quantidade,
+                    unidade: this.unidade,
+                    preco: this.preco
+                }
+            );
 
-        if (novoId !== 0) {
-            this.idBanco = novoId;
+            if (novoId && Number(novoId) > 0) {
+                this.idBanco = Number(novoId);
+            } else {
+                console.error('O servidor não confirmou o salvamento do produto.');
+            }
+        } catch (erro) {
+            console.error('Erro ao salvar produto:', erro);
+            alert('Erro ao salvar o produto. Verifique a conexão com o servidor.');
         }
     }
 }
+
+new TabelaEstoque();

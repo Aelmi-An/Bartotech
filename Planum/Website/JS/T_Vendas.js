@@ -8,44 +8,17 @@ class TabelaVendas {
     }
 
     iniciar(){
-        // ao abrir a página, busca as vendas salvas no banco
-        this.carregar();
-
         this.botaoNovo.addEventListener('click', () => {
             this.adicionar();
             console.log("Tô conectado");
         });
     }
 
-    // desenha cada venda que veio do banco (tive que pesquisar como faz, não é um codigo codigo inteiramente meu.)
-    async carregar() {
-        const lista = await Registros.listar('vendas');
-
-        lista.forEach(item => {
-            const d = item.dados;
-            const vendinhas = new Vendas(this.idVenda, d.produto, d.cliente, d.quantidade, d.valor, d.data, d.status);
-            vendinhas.criarLinhas();
-
-            vendinhas.idBanco = item.id;
-
-            this.tabela.appendChild(vendinhas.vendas);
-            this.idVenda++;
-        });
-    }
-
-    async adicionar() {
+    adicionar() {
         const vendinhas = new Vendas(this.idVenda);
         vendinhas.criarLinhas();
-        this.idVenda++;
-
-        // cria a venda no banco antes de mostrar a linha
-        await vendinhas.salvar();
-
-        if (vendinhas.idBanco === 0) {
-            return; // não salvou, então não mostra a linha
-        }
-
         this.tabela.appendChild(vendinhas.vendas);
+        this.idVenda++;
     }
 }
 
@@ -54,7 +27,6 @@ new TabelaVendas();
 class Vendas {
     constructor (id=0, produto='', cliente='', quantia=0, valor=0, data='', status='Pendente'){
         this.id=id;
-        this.idBanco=0;
         this.produto=produto;
         this.cliente=cliente;
         this.quantia=quantia;
